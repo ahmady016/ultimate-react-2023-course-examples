@@ -1,8 +1,14 @@
 import React from 'react'
 
+import Advice from './features/Advice'
+
 const App: React.FC = () => {
 	return (
-		<h2 className="text-2xl font-bold text-center">App Component</h2>
+		<>
+			<h2 className="text-2xl font-bold text-center">Part 01 Fundamentals</h2>
+			<Advice />
+		</>
+
 	)
 }
 
