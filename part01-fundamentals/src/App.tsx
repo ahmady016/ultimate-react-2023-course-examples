@@ -1,6 +1,7 @@
 import React from 'react'
 
-import Advice from './features/Advice'
+// import Advice from './features/Advice'
+import Pizza from './features/Pizza'
 
 const Header: React.FC = () => {
 	return (
@@ -24,7 +25,8 @@ const App: React.FC = () => {
 		<>
 			<Header />
 			<main>
-				<Advice />
+				{/* <Advice /> */}
+				<Pizza />
 			</main>
 		</>
 
