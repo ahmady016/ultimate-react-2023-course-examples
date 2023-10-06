@@ -15,19 +15,19 @@ const Advice: React.FC = () => {
     React.useEffect(() => void getAdvice(), [])
 
 	return (
-        <div className="w-2/3 m-auto">
-            <div role="alert" className="p-4 text-2xl text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300">
-                <span>{advice}</span>
+        <section className="bg-white dark:bg-gray-900">
+            <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16">
+                <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">{advice}</h1>
+                {advicesCount > 0 && <p className="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-400">you have read {advicesCount} pieces of advice</p>}
+                <button
+                    className="py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
+                    type='button'
+                    onClick={getAdvice}
+                >
+                    Get Advice
+                </button>
             </div>
-            {advicesCount > 0 && <div>you have read {advicesCount} pieces of advice</div>}
-            <button
-                className="mt-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                type='button'
-                onClick={getAdvice}
-            >
-                Get Advice
-            </button>
-        </div>
+        </section>
     )
 }
 
