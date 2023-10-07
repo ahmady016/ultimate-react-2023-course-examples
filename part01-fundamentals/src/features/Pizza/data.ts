@@ -1,6 +1,6 @@
 
-export const openHour = 7
-export const closeHour = 21
+export const openHour = 10
+export const closeHour = 22
 
 export type Pizza = {
 	name: string
