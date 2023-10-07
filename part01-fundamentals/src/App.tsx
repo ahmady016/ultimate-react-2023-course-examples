@@ -1,36 +1,21 @@
 import React from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-// import Advice from './features/Advice'
+import AppLayout from './Layout/AppLayout'
+
+import Advice from './features/Advice'
 import PizzaPage from './features/Pizza/PizzaPage'
 
-const Header: React.FC = () => {
-	return (
-		<nav className="bg-white border-gray-200 dark:bg-gray-900">
-			<div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-				<h1 className="flex items-center">
-					<img
-						className="h-8 mr-3"
-						src="https://flowbite.com/docs/images/logo.svg"
-						alt="Flowbite Logo"
-					/>
-					<span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Part One: Fundamentals</span>
-				</h1>
-			</div>
-		</nav>
-	)
-}
 
-const App: React.FC = () => {
-	return (
-		<>
-			<Header />
-			<main>
-				{/* <Advice /> */}
-				<PizzaPage />
-			</main>
-		</>
-
-	)
-}
+const App: React.FC = () => (
+	<BrowserRouter>
+		<Routes>
+			<Route path="/" element={<AppLayout />}>
+				<Route index element={<Advice />} />
+				<Route path="pizza" element={<PizzaPage />} />
+			</Route>
+		</Routes>
+	</BrowserRouter>
+)
 
 export default App
