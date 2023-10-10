@@ -6,6 +6,7 @@ import AppLayout from './Layout/AppLayout'
 import Advice from './features/Advice'
 import PizzaPage from './features/Pizza/PizzaPage'
 import DevProfilePage from './features/DevProfile/DevProfilePage'
+import StepsPage from './features/Steps/StepsPage'
 
 const App: React.FC = () => (
 	<BrowserRouter>
@@ -14,6 +15,7 @@ const App: React.FC = () => (
 				<Route index element={<Advice />} />
 				<Route path="pizza" element={<PizzaPage />} />
 				<Route path="profile" element={<DevProfilePage />} />
+				<Route path="steps" element={<StepsPage />} />
 			</Route>
 		</Routes>
 	</BrowserRouter>
