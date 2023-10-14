@@ -7,6 +7,7 @@ import Advice from './features/Advice'
 import PizzaPage from './features/Pizza/PizzaPage'
 import DevProfilePage from './features/DevProfile/DevProfilePage'
 import StepsPage from './features/Steps/StepsPage'
+import DaysCounter from './features/DaysCounter'
 
 const App: React.FC = () => (
 	<BrowserRouter>
@@ -16,6 +17,7 @@ const App: React.FC = () => (
 				<Route path="pizza" element={<PizzaPage />} />
 				<Route path="profile" element={<DevProfilePage />} />
 				<Route path="steps" element={<StepsPage />} />
+				<Route path="days-counter" element={<DaysCounter />} />
 			</Route>
 		</Routes>
 	</BrowserRouter>
