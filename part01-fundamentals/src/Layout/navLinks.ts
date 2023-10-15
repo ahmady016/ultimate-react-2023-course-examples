@@ -3,5 +3,6 @@ export const navLinks : Record<string, string> = {
     'pizza': 'Pizza',
     'profile': 'DevProfile',
     'steps': 'Steps',
-    'days-counter': 'DaysCounter'
+    'days-counter': 'DaysCounter',
+    'travel-list': 'TravelList'
 }
