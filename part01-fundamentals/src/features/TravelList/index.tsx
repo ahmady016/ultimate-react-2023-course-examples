@@ -2,7 +2,16 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { PackingItem, SortPackingItemsBy, initialPackingList } from './data'
+import {
+    PackingItem,
+    SortPackingItemsBy,
+    initialPackingList,
+    addToCachedPackingList,
+    removeFromCachedPackingList,
+    toggleCachedPackingListStatus,
+    clearCachedPackingList,
+    toPackingListArray
+} from './data'
 
 import PackingLogo from './PackingLogo'
 import PackingForm from './PackingForm'
@@ -23,11 +32,13 @@ const TravelListPage: React.FC = () => {
     const [packingsList, setPackingsList] = React.useState(initialPackingList)
     const createPackingItem = React.useCallback((newItem: PackingItem) => {
         setPackingsList(list => [...list, newItem])
+        addToCachedPackingList(newItem)
     }, [])
     const removePackingItem = React.useCallback((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         if(window.confirm("Are you sure you want to delete this item?")) {
             const id = e.currentTarget.id
             setPackingsList(list => list.filter(item => item.id !== id))
+            removeFromCachedPackingList(id)
         }
     }, [])
     const togglePackedStatus = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,11 +48,12 @@ const TravelListPage: React.FC = () => {
                 ? { ...item, packed: !item.packed }
                 : item
         ))
+        toggleCachedPackingListStatus(id)
     }, [])
     const sortPackingList = React.useCallback((sortBy: SortPackingItemsBy) => {
         switch (sortBy) {
             case 'input':
-                setPackingsList(list => [...list].sort((a, b) => a.id.localeCompare(b.id)))
+                setPackingsList(toPackingListArray())
                 break;
             case 'packed':
                 setPackingsList(list => [...list].sort((a, b) => (a.packed === b.packed) ? 0 : a.packed ? -1 : 1))
@@ -57,8 +69,10 @@ const TravelListPage: React.FC = () => {
         }
     }, [])
     const clearPackingList = React.useCallback(() => {
-        if(window.confirm("Are you sure you want to delete all items?"))
+        if(window.confirm("Are you sure you want to delete all items?")) {
             setPackingsList([])
+            clearCachedPackingList()
+        }
     }, [])
 
 	return (

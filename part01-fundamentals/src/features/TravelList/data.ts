@@ -41,3 +41,29 @@ export const initialPackingList: PackingItem[] = [
         packed: false,
     },
 ]
+
+let cachedPackingList = initialPackingList.reduce((cachedList, item) => {
+    const { id, ...itemWithoutId } = item
+    cachedList[id] = itemWithoutId
+    return cachedList
+}, {} as Record<string, Omit<PackingItem, 'id'>>)
+
+export const toPackingListArray = () => {
+    return Object
+        .entries(cachedPackingList)
+        .map(([id, item]) => ({ id, ...item })) as PackingItem[]
+}
+
+export const addToCachedPackingList = (newItem: PackingItem) => {
+    const { id, ...itemWithoutId } = newItem
+    cachedPackingList[id] = itemWithoutId
+}
+export const toggleCachedPackingListStatus = (id: string) => {
+    cachedPackingList[id].packed = !cachedPackingList[id].packed
+}
+export const removeFromCachedPackingList = (id: string) => {
+    delete cachedPackingList[id]
+}
+export const clearCachedPackingList = () => {
+    cachedPackingList = {}
+}
