@@ -4,5 +4,6 @@ export const navLinks : Record<string, string> = {
     'profile': 'DevProfile',
     'steps': 'Steps',
     'days-counter': 'DaysCounter',
-    'travel-list': 'TravelList'
+    'travel-list': 'TravelList',
+    'accordion': 'Accordion'
 }

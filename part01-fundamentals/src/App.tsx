@@ -9,6 +9,7 @@ import DevProfilePage from './features/DevProfile/DevProfilePage'
 import StepsPage from './features/Steps/StepsPage'
 import DaysCounter from './features/DaysCounter'
 import TravelListPage from './features/TravelList'
+import AccordionPage from './features/Accordion/AccordionPage'
 
 const App: React.FC = () => (
 	<BrowserRouter>
@@ -20,6 +21,7 @@ const App: React.FC = () => (
 				<Route path="steps" element={<StepsPage />} />
 				<Route path="days-counter" element={<DaysCounter />} />
 				<Route path="travel-list" element={<TravelListPage />} />
+				<Route path="accordion" element={<AccordionPage />} />
 			</Route>
 		</Routes>
 	</BrowserRouter>
