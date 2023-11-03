@@ -10,6 +10,7 @@ import StepsPage from './features/Steps/StepsPage'
 import DaysCounter from './features/DaysCounter'
 import TravelListPage from './features/TravelList'
 import AccordionPage from './features/Accordion/AccordionPage'
+import TipsCalculator from './features/Tips/TipsCalculator'
 
 const App: React.FC = () => (
 	<BrowserRouter>
@@ -22,6 +23,7 @@ const App: React.FC = () => (
 				<Route path="days-counter" element={<DaysCounter />} />
 				<Route path="travel-list" element={<TravelListPage />} />
 				<Route path="accordion" element={<AccordionPage />} />
+				<Route path="tips" element={<TipsCalculator />} />
 			</Route>
 		</Routes>
 	</BrowserRouter>
