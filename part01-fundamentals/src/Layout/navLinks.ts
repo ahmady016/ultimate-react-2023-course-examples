@@ -6,5 +6,6 @@ export const navLinks : Record<string, string> = {
     'days-counter': 'DaysCounter',
     'travel-list': 'TravelList',
     'accordion': 'Accordion',
-    'tips': 'Tips Calculator'
+    'tips': 'Tips Calculator',
+    'bill-splitter': 'Bill Splitter'
 }

@@ -11,6 +11,7 @@ import DaysCounter from './features/DaysCounter'
 import TravelListPage from './features/TravelList'
 import AccordionPage from './features/Accordion/AccordionPage'
 import TipsCalculator from './features/Tips/TipsCalculator'
+import BillSplitterPage from './features/BillSplitter'
 
 const App: React.FC = () => (
 	<BrowserRouter>
@@ -24,6 +25,7 @@ const App: React.FC = () => (
 				<Route path="travel-list" element={<TravelListPage />} />
 				<Route path="accordion" element={<AccordionPage />} />
 				<Route path="tips" element={<TipsCalculator />} />
+				<Route path="bill-splitter" element={<BillSplitterPage />} />
 			</Route>
 		</Routes>
 	</BrowserRouter>
