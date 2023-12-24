@@ -10,7 +10,7 @@ type StarProps = {
 	size: number
 	color: string
     isFull: boolean
-    onClick: () => undefined
+    onClick: () => void
     onMouseEnter: () => undefined
     onMouseLeave: () => undefined
 }

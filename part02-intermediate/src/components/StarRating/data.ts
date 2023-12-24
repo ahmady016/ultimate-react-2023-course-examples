@@ -7,6 +7,7 @@ export type StarRatingProps = {
 	color: string
 	defaultRating?: number
 	messages?: string[]
+	onChange?: React.Dispatch<React.SetStateAction<number>>
 }
 export const starRatingPropsList: StarRatingProps[] = [
 	{

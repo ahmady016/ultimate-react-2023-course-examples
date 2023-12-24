@@ -23,12 +23,18 @@ const StarRatingBoxContainer = styled.div<{ $color: string, $size: number }>`
         }
     }
 `
-const StarRatingBox: React.FC<StarRatingProps> = ({ limit, size, color, defaultRating = 0, messages = [] }) => {
+const StarRatingBox: React.FC<StarRatingProps> = ({
+    limit, size, color, defaultRating = 0, messages = [], onChange
+}) => {
     const [ratingValues, setRatingValues] = React.useState(fillRatingValues(limit))
     React.useEffect(() => void setRatingValues(fillRatingValues(limit)), [limit])
 
     const [currentRating, setCurrentRating] = React.useState(defaultRating)
-    const changeCurrentRating = React.useCallback((value: number) => () => void setCurrentRating(value), [])
+    const changeCurrentRating = React.useCallback((value: number) => () => {
+        setCurrentRating(value)
+        if(onChange)
+            onChange(value)
+    }, [onChange])
 
     const [tempRating, setTempRating] = React.useState(0)
     const resetTempRating = React.useCallback(() => void setTempRating(0), [])
@@ -39,6 +45,7 @@ const StarRatingBox: React.FC<StarRatingProps> = ({ limit, size, color, defaultR
             <div>
                 {ratingValues.map(value =>
                     <Star
+                        key={value}
                         size={size}
                         color={color}
                         isFull={tempRating ? tempRating >= value : currentRating >= value}
