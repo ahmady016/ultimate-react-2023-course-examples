@@ -4,6 +4,8 @@ import styled from 'styled-components'
 const ListBoxContainer = styled.div`
 	width: 42rem;
 	max-width: 42rem;
+	height: 60rem;
+	overflow-y: auto;
 	background-color: var(--color-background-500);
 	border-radius: 0.5rem;
 	position: relative;
@@ -23,20 +25,24 @@ const ListBoxContainer = styled.div`
 		z-index: 999;
 	}
 	button.delete {
-		position: absolute;
-		right: 2.4rem;
-		height: 1.8rem;
-		aspect-ratio: 1;
-		border-radius: 50%;
-		border: none;
-		background-color: var(--color-red);
-		color: var(--color-background-900);
-		font-size: 1rem;
-		font-weight: bold;
 		cursor: pointer;
+		position: absolute;
+		right: 2rem;
+		height: 2rem;
+		aspect-ratio: 1;
+		border: none;
+		border-radius: 50%;
+		font-size: 1rem;
+		font-weight: 600;
+		background-color: var(--color-background-500);
+		color: var(--color-background-900);
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		transition: all 0.3s;
 		&:hover {
-			background-color: var(--color-red-dark);
+			background-color: var(--color-background-900);
+			color: var(--color-background-500);
 		}
 	}
 	ul {
@@ -76,7 +82,7 @@ const ListBoxContainer = styled.div`
 const ListBox: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 	const [isOpen, setIsOpen] = React.useState(true)
 	return (
-		<ListBoxContainer>
+		<ListBoxContainer className='scroll'>
 			<button className="toggle" onClick={() => setIsOpen((open) => !open)}>
 				{isOpen ? '–' : '+'}
 			</button>

@@ -1,23 +1,37 @@
 import React from 'react'
+import styled from 'styled-components'
 
 import { Movie } from '../../data'
 
-const MovieItem: React.FC<Movie> = ({ imdbID, Poster, Title, Year }) => (
-	<li key={imdbID}>
-		<img src={Poster} alt={`${Title} poster`} />
-		<h3>{Title}</h3>
-		<div>
-			<p>
-				<span>🗓</span>
-				<span>{Year}</span>
-			</p>
-		</div>
-	</li>
-)
+const MovieItemContainer = styled.li`
+	cursor: pointer;
+`
+type MovieItemProps = {
+	movie: Movie
+	selectMovieId: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
+}
+const MovieItem: React.FC<MovieItemProps> = ({ movie: { imdbID, poster, title, year }, selectMovieId }) => {
+	return (
+		<MovieItemContainer key={imdbID} id={imdbID} onClick={selectMovieId}>
+			<img src={poster} alt={`${title} poster`} />
+			<h3>{title}</h3>
+			<div>
+				<p>
+					<span>🗓</span>
+					<span>{year}</span>
+				</p>
+			</div>
+		</MovieItemContainer>
+	)
+}
 
-const MovieList: React.FC<{ movies: Movie[] }> = ({ movies }) => (
+type MovieListProps = {
+	movies: Movie[]
+	selectMovieId: (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => void
+}
+const MovieList: React.FC<MovieListProps> = ({ movies, selectMovieId }) => (
 	<ul>
-		{movies?.map(movie => <MovieItem key={movie.imdbID} {...movie} /> )}
+		{movies?.map(movie => <MovieItem key={movie.imdbID} movie={movie} selectMovieId={selectMovieId}  /> )}
 	</ul>
 )
 

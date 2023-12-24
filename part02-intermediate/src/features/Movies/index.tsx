@@ -7,13 +7,17 @@ import Logo from './Navbar/Logo'
 import Search from './Navbar/Search'
 import Results from './Navbar/Results'
 
+import Spinner from '../../components/Spinner'
+import MovieList from './MainBox/ListBox/MovieList'
+
 import MainBox from './MainBox'
 import ListBox from './MainBox/ListBox'
-import MovieList from './MainBox/ListBox/MovieList'
+import Alert from '../../components/Alert'
 import WatchedList from './MainBox/ListBox/WatchedList'
 import WatchedSummary from './MainBox/ListBox/WatchedSummary'
+import MovieDetailsBox from './MainBox/ListBox/MovieDetailsBox'
 
-import { initialMovies, initialWatched } from './data'
+import { MovieDetails, Watched, mapMovieDetailsToWatched, useFetchMovies } from './data'
 
 const MoviesPageContainer = styled.div`
 	width:95vw;
@@ -33,23 +37,57 @@ const MoviesPageContainer = styled.div`
 	--color-red-dark: #e03131;
 `
 const MoviesPage: React.FC = () => {
-	const [movies, _] = React.useState(initialMovies)
-	const [watchedList, __] = React.useState(initialWatched)
+	const [query, setQuery] = React.useState('')
+	const { isLoading, error, movies } = useFetchMovies(query)
+
+	const [selectedMovieId, setSelectedMovieId] = React.useState('')
+	const selectMovieId = React.useCallback((e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+		const currentMovieId = e.currentTarget.id
+		setSelectedMovieId(movieId => movieId === currentMovieId ? '' : currentMovieId)
+	}, [])
+	const clearMovieId = React.useCallback(() => {
+		setSelectedMovieId('')
+	}, [])
+
+	const [watchedList, setWatchedList] = React.useState<Watched[]>([])
+	const addToWatchedList = (movie: MovieDetails, userRating: number) => {
+		const newWatchedMovie = mapMovieDetailsToWatched(movie, userRating)
+		setWatchedList(list => [...list, newWatchedMovie])
+	}
+	const removeFromWatchedList = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+		const currentMovieId = e.currentTarget.id
+		setWatchedList(list => list.filter(movie => movie.imdbID !== currentMovieId))
+	}
+	React.useEffect(() => {
+		console.log("🚀: watchedList:", watchedList)
+	}, [watchedList])
 
 	return (
 		<MoviesPageContainer>
 			<Navbar>
 				<Logo />
-				<Search />
+				<Search query={query} setQuery={setQuery} />
 				<Results movies={movies} />
 			</Navbar>
 			<MainBox>
 				<ListBox>
-					<MovieList movies={movies} />
+					{isLoading && <Spinner size={8} align='center' marginTop={14} />}
+					{error && <Alert type='danger'>{error}</Alert>}
+					{!isLoading && !error && <MovieList movies={movies} selectMovieId={selectMovieId} />}
 				</ListBox>
 				<ListBox>
-					<WatchedSummary watchedList={watchedList} />
-					<WatchedList watchedList={watchedList} />
+					{!selectedMovieId
+						?	<>
+								<WatchedSummary watchedList={watchedList} />
+								<WatchedList watchedList={watchedList} removeFromWatchedList={removeFromWatchedList} />
+							</>
+						: 	<MovieDetailsBox
+								watchedList={watchedList}
+								selectedMovieId={selectedMovieId}
+								clearMovieId={clearMovieId}
+								addToWatchedList={addToWatchedList}
+							/>
+					}
 				</ListBox>
 			</MainBox>
 		</MoviesPageContainer>

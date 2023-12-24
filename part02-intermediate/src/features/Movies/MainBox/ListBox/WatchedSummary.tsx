@@ -1,11 +1,14 @@
 import React from 'react'
+import { GrStar, GrStarOutline } from 'react-icons/gr'
+import { FaHashtag } from 'react-icons/fa6'
+import { IoTimerOutline } from 'react-icons/io5'
 import styled from 'styled-components'
 
-import { Watched, average } from '../../data'
+import { Watched, average, total } from '../../data'
 
 const WatchedSummaryContainer = styled.div`
-	padding: 2.2rem 3.2rem 1.8rem 3.2rem;
-	border-radius: 0.9rem;
+	padding: 2rem 3rem 1.75rem 3rem;
+	border-radius: 0.75rem;
 	background-color: var(--color-background-100);
 	box-shadow: 0 1.2rem 2.4rem rgba(86, 27, 106, 0.25);
 	h2 {
@@ -17,40 +20,40 @@ const WatchedSummaryContainer = styled.div`
 	div {
 		display: flex;
 		align-items: center;
-		gap: 2.4rem;
+		gap: 1.75rem;
 		p {
 			display: flex;
 			align-items: center;
-			gap: 0.75rem;
-			font-size: 1rem;
+			gap: 0.5rem;
+			font-size: 1.1rem;
 			font-weight: 600;
 		}
 	}
 `
 const WatchedSummary: React.FC<{ watchedList: Watched[] }> = ({ watchedList }) => {
-	const avgImdbRating = average(watchedList.map((movie) => movie.imdbRating))
-	const avgUserRating = average(watchedList.map((movie) => movie.userRating))
-	const avgRuntime = average(watchedList.map((movie) => movie.runtime))
+	const avgImdbRating = average(watchedList.map(movie => movie.imdbRating))
+	const avgUserRating = average(watchedList.map(movie => movie.userRating))
+	const avgRuntime = total(watchedList.map(movie => Number(movie.runtime.substring(0, movie.runtime.indexOf(' ')))))
 
 	return (
 		<WatchedSummaryContainer>
 			<h2>Movies you watched</h2>
 			<div>
 				<p>
-					<span>#️⃣</span>
+					<span><FaHashtag /></span>
 					<span>{watchedList.length} movies</span>
 				</p>
 				<p>
-					<span>⭐️</span>
+					<span title="Total Watched Time"><IoTimerOutline /></span>
+					<span>{avgRuntime} min</span>
+				</p>
+				<p>
+					<span title="IMDB Rating Average"><GrStar /></span>
 					<span>{avgImdbRating}</span>
 				</p>
 				<p>
-					<span>🌟</span>
+					<span title="User Rating Average"><GrStarOutline /></span>
 					<span>{avgUserRating}</span>
-				</p>
-				<p>
-					<span>⏳</span>
-					<span>{avgRuntime} min</span>
 				</p>
 			</div>
 		</WatchedSummaryContainer>

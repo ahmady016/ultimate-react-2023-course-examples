@@ -1,11 +1,19 @@
 import React from 'react'
+import { FaTrashCan } from 'react-icons/fa6'
 
 import { Watched } from '../../data'
 
-const WatchedItem: React.FC<Watched> = ({ imdbID, Poster, Title, imdbRating, userRating, runtime }) => (
+type WatchedItemProps = {
+	watched: Watched
+	removeFromWatchedList: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+}
+const WatchedItem: React.FC<WatchedItemProps> = ({
+	watched: { imdbID, poster, title, imdbRating, userRating, runtime },
+	removeFromWatchedList
+}) => (
 	<li key={imdbID}>
-		<img src={Poster} alt={`${Title} poster`} />
-		<h3>{Title}</h3>
+		<img src={poster} alt={`${title} poster`} />
+		<h3>{title}</h3>
 		<div>
 			<p>
 				<span>⭐️</span>
@@ -17,15 +25,34 @@ const WatchedItem: React.FC<Watched> = ({ imdbID, Poster, Title, imdbRating, use
 			</p>
 			<p>
 				<span>⏳</span>
-				<span>{runtime} min</span>
+				<span>{runtime}</span>
 			</p>
+			<button
+				className="delete"
+				title="delete"
+				id={imdbID}
+				type="button"
+				onClick={removeFromWatchedList}
+			>
+				<FaTrashCan />
+			</button>
 		</div>
 	</li>
 )
 
-const WatchedList: React.FC<{ watchedList: Watched[] }> = ({ watchedList }) => (
+type WatchedListProps = {
+	watchedList: Watched[]
+	removeFromWatchedList: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+}
+const WatchedList: React.FC<WatchedListProps> = ({ watchedList, removeFromWatchedList }) => (
 	<ul>
-		{watchedList.map(watched => <WatchedItem key={watched.imdbID} {...watched} /> )}
+		{watchedList.map(watched =>
+			<WatchedItem
+				key={watched.imdbID}
+				watched={watched}
+				removeFromWatchedList={removeFromWatchedList}
+			/>
+		)}
 	</ul>
 )
 

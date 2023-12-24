@@ -1,7 +1,10 @@
 import React from 'react'
 
-const Search: React.FC = () => {
-	const [query, setQuery] = React.useState('')
+type SearchProps = {
+	query: string
+	setQuery: React.Dispatch<React.SetStateAction<string>>
+}
+const Search: React.FC<SearchProps> = ({ query, setQuery }) => {
 	return (
 		<input
 			type="text"
