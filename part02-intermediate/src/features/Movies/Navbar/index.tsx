@@ -3,16 +3,20 @@ import styled from 'styled-components'
 
 const NavbarContainer = styled.nav`
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: 4fr 5fr 3fr;
 	align-items: center;
-	height: 7.2rem;
-	padding: 0 3.2rem;
+	gap: 1rem;
+	height: 7rem;
+	padding: 0 2rem;
 	background-color: var(--color-primary);
 	border-radius: 0.5rem;
 	div {
 		display: flex;
 		align-items: center;
-		gap: 0.75rem;
+		gap: 0.5rem;
+		span {
+			font-size: 3rem;
+		}
 		h1 {
 			font-size: 1.75rem;
 			font-weight: 600;
@@ -20,15 +24,15 @@ const NavbarContainer = styled.nav`
 		}
 	}
 	input {
+		width: 40rem;
+		padding: 1rem 1.5rem;
 		justify-self: center;
 		border: none;
-		padding: 1.1rem 1.6rem;
-		font-size: 1.2rem;
+		font-size: 1.4rem;
 		border-radius: 0.7rem;
-		width: 40rem;
-		transition: all 0.3s;
 		color: var(--color-text-white);
 		background-color: var(--color-primary-light);
+		transition: all 0.3s;
 		&:focus {
 			outline: none;
 			box-shadow: 0 2.4rem 2.4rem rgba(65, 19, 81, 0.25);

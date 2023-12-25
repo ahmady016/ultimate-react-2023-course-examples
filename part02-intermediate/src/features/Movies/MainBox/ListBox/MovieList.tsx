@@ -1,4 +1,5 @@
 import React from 'react'
+import { FcCalendar } from 'react-icons/fc'
 import styled from 'styled-components'
 
 import { Movie } from '../../data'
@@ -17,7 +18,7 @@ const MovieItem: React.FC<MovieItemProps> = ({ movie: { imdbID, poster, title, y
 			<h3>{title}</h3>
 			<div>
 				<p>
-					<span>🗓</span>
+					<span><FcCalendar /></span>
 					<span>{year}</span>
 				</p>
 			</div>

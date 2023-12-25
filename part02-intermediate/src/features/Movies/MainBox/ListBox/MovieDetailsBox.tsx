@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import { FcUpLeft } from 'react-icons/fc'
+import { GrStar, GrStarOutline } from 'react-icons/gr'
+import { FiPlus } from 'react-icons/fi'
 import styled from 'styled-components'
 
 import Alert from '../../../../components/Alert'
@@ -75,6 +77,10 @@ const MovieDetailsBoxContainer = styled.div`
             gap: 2rem;
             button {
                 cursor: pointer;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 0.75rem;
                 padding: 1rem;
                 border: none;
                 border-radius: 10rem;
@@ -85,6 +91,9 @@ const MovieDetailsBoxContainer = styled.div`
                 transition: all 0.3s;
                 &:hover {
                     background-color: var(--color-primary-light);
+                }
+                svg {
+                    font-size: 1.5rem;
                 }
             }
         }
@@ -144,7 +153,7 @@ const MovieDetailsBox: React.FC<MovieDetailsBoxProps> = ({
                             </p>
                             <p>{movie.genre}</p>
                             <p>
-                                <span>⭐️</span>
+                                <span><GrStar /></span>
                                 {movie.imdbRating} IMDb rating
                             </p>
                         </div>
@@ -160,12 +169,13 @@ const MovieDetailsBox: React.FC<MovieDetailsBoxProps> = ({
                                             onChange={setUserRating}
                                         />
                                         {userRating > 0 && (
-                                            <button onClick={addMovieToWatchedList}>
-                                                + Add to list
+                                            <button type="button" onClick={addMovieToWatchedList}>
+                                                <FiPlus />
+                                                <span>Add to list</span>
                                             </button>
                                         )}
                                     </>
-                                : <p>You rated this movie {watchedUserRating} <span>⭐️</span></p>
+                                : <p>You rated this movie with: {watchedUserRating}<span><GrStarOutline /></span></p>
                             }
                         </div>
                         <p><em>{movie.plot}</em></p>

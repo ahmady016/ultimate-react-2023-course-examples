@@ -120,37 +120,43 @@ function setCachedMovies(mappedMovies: Movie[]) {
 		return movies
 	}, cachedMovies)
 }
-export function useFetchMovies(query: string) {
+export function useFetchMovies(query: string, clearMovieId: () => void) {
 	const [isLoading, setIsLoading] = React.useState(false)
 	const [error, setError] = React.useState('')
 	const [movies, setMovies] = React.useState<Movie[]>([])
 
+	const abortController = new AbortController()
 	async function fetchMovies() {
 		setIsLoading(true)
 		setError('')
 		try {
-			const res = await fetch(`${BASE_URL}&s=${query}`)
+			const res = await fetch(`${BASE_URL}&s=${query}`, { signal: abortController.signal })
 			if (!res.ok) throw new Error('Something went wrong with fetching movies')
 			const data = await res.json()
 			if (data.Response === 'False') throw new Error('Movie(s) Not Found')
 			const mappedMovies = mapMovies(data.Search as SearchMoviesResponse[])
-			setMovies(mappedMovies)
 			setCachedMovies(mappedMovies)
+			setMovies(mappedMovies)
+			setError('')
 		} catch (error: any) {
-			console.log(error.message)
-			setError(error.message)
+			if(error.name !== 'AbortError') {
+				console.log(error.message)
+				setError(error.message)
+			}
 		} finally {
 			setIsLoading(false)
 		}
 	}
 
 	React.useEffect(() => {
-		if (query.length < 3) {
+		if (query.length >= 3) {
+			clearMovieId()
+			fetchMovies()
+		} else {
 			setIsLoading(false)
 			setError('')
-		} else {
-			fetchMovies()
 		}
+		return () => { abortController.abort() }
 	}, [query])
 
 	return {
@@ -159,27 +165,6 @@ export function useFetchMovies(query: string) {
 		movies
 	}
 }
-
-// export function useSelectedMovieId() {
-// 	const [selectedMovieId, setSelectedMovieId] = React.useState('')
-// 	const selectMovieId = React.useCallback((e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
-// 		const currentMovieId = e.currentTarget.id
-// 		setSelectedMovieId(movieId => movieId === currentMovieId ? '' : currentMovieId)
-// 	}, [])
-// 	const clearMovieId = React.useCallback(() => {
-// 		setSelectedMovieId('')
-// 	}, [])
-
-// 	React.useEffect(() => {
-// 		console.log("🚀: selectedMovieId:", selectedMovieId)
-// 	}, [selectedMovieId])
-
-// 	return {
-// 		selectedMovieId,
-// 		selectMovieId,
-// 		clearMovieId
-// 	}
-// }
 
 type MovieRating = {
 	Source: string
@@ -281,25 +266,3 @@ export function mapMovieDetailsToWatched(movie: MovieDetails, userRating: number
 		userRating,
 	} as Watched
 }
-
-// export function useWatchedMovies() {
-// 	const [watchedList, setWatchedList] = React.useState<Watched[]>([])
-// 	const addToWatchedList = (movie: MovieDetails, userRating: number) => {
-// 		const newWatchedMovie = mapMovieDetailsToWatched(movie, userRating)
-// 		setWatchedList(list => [...list, newWatchedMovie])
-// 	}
-// 	const removeFromWatchedList = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-// 		const currentMovieId = e.currentTarget.id
-// 		setWatchedList(list => list.filter(movie => movie.imdbID !== currentMovieId))
-// 	}
-
-// 	React.useEffect(() => {
-// 		console.log("🚀: watchedList:", watchedList)
-// 	}, [watchedList.length])
-
-// 	return {
-// 		watchedList,
-// 		addToWatchedList,
-// 		removeFromWatchedList
-// 	}
-// }

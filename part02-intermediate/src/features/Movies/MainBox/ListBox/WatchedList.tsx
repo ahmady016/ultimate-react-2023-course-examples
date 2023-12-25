@@ -1,4 +1,6 @@
 import React from 'react'
+import { GrStar, GrStarOutline } from 'react-icons/gr'
+import { IoTimerOutline } from 'react-icons/io5'
 import { FaTrashCan } from 'react-icons/fa6'
 
 import { Watched } from '../../data'
@@ -16,15 +18,15 @@ const WatchedItem: React.FC<WatchedItemProps> = ({
 		<h3>{title}</h3>
 		<div>
 			<p>
-				<span>⭐️</span>
+				<span><GrStar /></span>
 				<span>{imdbRating}</span>
 			</p>
 			<p>
-				<span>🌟</span>
+				<span><GrStarOutline /></span>
 				<span>{userRating}</span>
 			</p>
 			<p>
-				<span>⏳</span>
+				<span><IoTimerOutline /></span>
 				<span>{runtime}</span>
 			</p>
 			<button

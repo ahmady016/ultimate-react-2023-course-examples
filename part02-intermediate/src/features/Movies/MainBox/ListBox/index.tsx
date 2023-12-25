@@ -28,11 +28,11 @@ const ListBoxContainer = styled.div`
 		cursor: pointer;
 		position: absolute;
 		right: 2rem;
-		height: 2rem;
+		height: 2.4rem;
 		aspect-ratio: 1;
 		border: none;
 		border-radius: 50%;
-		font-size: 1rem;
+		font-size: 1.25rem;
 		font-weight: 600;
 		background-color: var(--color-background-500);
 		color: var(--color-background-900);
@@ -73,7 +73,10 @@ const ListBoxContainer = styled.div`
 				p {
 					display: flex;
 					align-items: center;
-					gap: 0.8rem;
+					gap: 0.75rem;
+					span:first-child {
+						font-size: 1.5rem;
+					}
 				}
 			}
 		}

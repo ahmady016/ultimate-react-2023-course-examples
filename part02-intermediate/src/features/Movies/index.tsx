@@ -37,9 +37,6 @@ const MoviesPageContainer = styled.div`
 	--color-red-dark: #e03131;
 `
 const MoviesPage: React.FC = () => {
-	const [query, setQuery] = React.useState('')
-	const { isLoading, error, movies } = useFetchMovies(query)
-
 	const [selectedMovieId, setSelectedMovieId] = React.useState('')
 	const selectMovieId = React.useCallback((e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
 		const currentMovieId = e.currentTarget.id
@@ -58,9 +55,9 @@ const MoviesPage: React.FC = () => {
 		const currentMovieId = e.currentTarget.id
 		setWatchedList(list => list.filter(movie => movie.imdbID !== currentMovieId))
 	}
-	React.useEffect(() => {
-		console.log("🚀: watchedList:", watchedList)
-	}, [watchedList])
+
+	const [query, setQuery] = React.useState('')
+	const { isLoading, error, movies } = useFetchMovies(query, clearMovieId)
 
 	return (
 		<MoviesPageContainer>
