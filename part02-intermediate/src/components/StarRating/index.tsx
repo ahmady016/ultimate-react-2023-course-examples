@@ -7,7 +7,8 @@ import StarRatingBox from './StarRatingBox'
 
 const StarRatingPageContainer = styled.div`
     width:90vw;
-	margin: 1rem auto;
+	margin: auto;
+    padding-top: 2rem;
 	font-family: 'IBM Plex Mono', sans-serif;
     h2 {
         text-align: center;
