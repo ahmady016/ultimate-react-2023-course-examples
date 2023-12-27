@@ -81,8 +81,13 @@ const CurrencyConverter: React.FC = () => {
         }
     }, [currencies])
 
+    const [delayedBaseAmount, setDelayedBaseAmount] = React.useState(0)
+    React.useEffect(() => {
+        const timeoutId = window.setTimeout(() => setDelayedBaseAmount(baseAmount), 700)
+        return () => clearTimeout(timeoutId)
+    }, [baseAmount])
     const [targetAmount, setTargetAmount] = React.useState(0)
-    const { isLoading: isConverterLoading, result } = useCurrencyConverter(baseAmount, baseCurrency, targetCurrency)
+    const { isLoading: isConverterLoading, result } = useCurrencyConverter(delayedBaseAmount, baseCurrency, targetCurrency)
     React.useEffect(() => {
         setTargetAmount(result)
     }, [result])

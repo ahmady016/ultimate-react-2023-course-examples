@@ -41,18 +41,24 @@ export function useCurrencyConverter(
 	const [error, setError] = React.useState('')
 	const [result, setResult] = React.useState<number>(0)
 
+	const abortController = new AbortController()
 	async function doConvertCurrency(amount: number, from: string, to: string) {
 		setIsLoading(true)
 		setError('')
 		try {
-			const res = await fetch(`${BASE_URL}/latest?amount=${amount}&from=${from}&to=${to}`)
+			const res = await fetch(
+				`${BASE_URL}/latest?amount=${amount}&from=${from}&to=${to}`,
+				{ signal: abortController.signal }
+			)
 			if (!res.ok) throw new Error('Something went wrong when converting currencies')
 			const data = await res.json()
 			setResult(data.rates[to])
 			setError('')
 		} catch (error: any) {
-            console.log(error.message)
-            setError(error.message)
+			if(error.name !== 'AbortError') {
+				console.log(error.message)
+				setError(error.message)
+			}
 		} finally {
 			setIsLoading(false)
 		}
@@ -65,6 +71,7 @@ export function useCurrencyConverter(
 			else
 				doConvertCurrency(baseAmount, baseCurrency, targetCurrency)
 		}
+		return () => { abortController.abort() }
 	}, [baseCurrency, targetCurrency, baseAmount])
 
 	return { isLoading, error, result }
