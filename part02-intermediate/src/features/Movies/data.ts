@@ -44,6 +44,7 @@ export type Watched = {
 	runtime: string
 	imdbRating: number
 	userRating: number
+	userRatingAttempts: number
 }
 
 export const initialMovies: Movie[] = [
@@ -82,6 +83,7 @@ export const initialWatched: Watched[] = [
 		runtime: "148 min",
 		imdbRating: 8.8,
 		userRating: 10,
+		userRatingAttempts: 1,
 	},
 	{
 		imdbID: 'tt0088763',
@@ -92,6 +94,7 @@ export const initialWatched: Watched[] = [
 		runtime: "116 min",
 		imdbRating: 8.5,
 		userRating: 9,
+		userRatingAttempts: 1,
 	},
 ]
 
@@ -155,6 +158,7 @@ export function useFetchMovies(query: string, clearMovieId: () => void) {
 		} else {
 			setIsLoading(false)
 			setError('')
+			setMovies([])
 		}
 		return () => { abortController.abort() }
 	}, [query])
@@ -255,7 +259,7 @@ export function useFetchMovieDetails(selectedMovieId: string) {
 	}
 }
 
-export function mapMovieDetailsToWatched(movie: MovieDetails, userRating: number) {
+export function mapMovieDetailsToWatched(movie: MovieDetails, userRating: number, userRatingAttempts: number) {
 	return {
 		imdbID: movie.imdbID,
 		title: movie.title,
@@ -264,5 +268,6 @@ export function mapMovieDetailsToWatched(movie: MovieDetails, userRating: number
 		runtime: movie.runtime,
 		imdbRating: movie.imdbRating,
 		userRating,
+		userRatingAttempts,
 	} as Watched
 }

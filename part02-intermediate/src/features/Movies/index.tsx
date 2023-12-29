@@ -46,9 +46,15 @@ const MoviesPage: React.FC = () => {
 		setSelectedMovieId('')
 	}, [])
 
-	const [watchedList, setWatchedList] = React.useState<Watched[]>([])
-	const addToWatchedList = (movie: MovieDetails, userRating: number) => {
-		const newWatchedMovie = mapMovieDetailsToWatched(movie, userRating)
+	const [watchedList, setWatchedList] = React.useState<Watched[]>(() => {
+		const storedWatchedList = localStorage.getItem("WATCHED_MOVIES")
+		return storedWatchedList ? JSON.parse(storedWatchedList) : []
+	})
+	React.useEffect(() => {
+		localStorage.setItem("WATCHED_MOVIES", JSON.stringify(watchedList))
+	}, [watchedList])
+	const addToWatchedList = (movie: MovieDetails, userRating: number, userRatingAttempts: number) => {
+		const newWatchedMovie = mapMovieDetailsToWatched(movie, userRating, userRatingAttempts)
 		setWatchedList(list => [...list, newWatchedMovie])
 	}
 	const removeFromWatchedList = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {

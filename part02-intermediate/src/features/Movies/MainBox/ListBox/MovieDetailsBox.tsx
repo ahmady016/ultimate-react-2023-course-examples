@@ -103,7 +103,7 @@ type MovieDetailsBoxProps = {
     watchedList: Watched[]
     selectedMovieId: string
     clearMovieId: () => void
-    addToWatchedList: (movie: MovieDetails, userRating: number) => void
+    addToWatchedList: (movie: MovieDetails, userRating: number, userRatingAttempts: number) => void
 }
 const MovieDetailsBox: React.FC<MovieDetailsBoxProps> = ({
     watchedList, selectedMovieId, clearMovieId, addToWatchedList
@@ -113,10 +113,16 @@ const MovieDetailsBox: React.FC<MovieDetailsBoxProps> = ({
     const isWatched = watchedList.map(movie => movie.imdbID).includes(selectedMovieId)
     const watchedUserRating = watchedList.find(movie => movie.imdbID === selectedMovieId)?.userRating
 
+
     const [userRating, setUserRating] = React.useState(0)
+    const userRatingAttemptsRef = React.useRef(0)
+    React.useEffect(() => {
+        if (userRating) userRatingAttemptsRef.current++;
+    }, [userRating])
+
     const addMovieToWatchedList = React.useCallback(() => {
         if(movie) {
-            addToWatchedList(movie, userRating)
+            addToWatchedList(movie, userRating, userRatingAttemptsRef.current)
             clearMovieId()
         }
     }, [movie, userRating])
@@ -133,7 +139,7 @@ const MovieDetailsBox: React.FC<MovieDetailsBoxProps> = ({
     React.useEffect(() => {
         if (movie?.title) document.title = `Movie | ${movie.title}`
         return () => { document.title = "Search Movies" }
-    }, [movie?.title])
+    }, [movie])
 
 	return (
 		<MovieDetailsBoxContainer>
