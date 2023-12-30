@@ -17,6 +17,7 @@ import WatchedList from './MainBox/ListBox/WatchedList'
 import WatchedSummary from './MainBox/ListBox/WatchedSummary'
 import MovieDetailsBox from './MainBox/ListBox/MovieDetailsBox'
 
+import { useLocalStorageState } from '../../hooks/useLocalStorageState'
 import { MovieDetails, Watched, mapMovieDetailsToWatched, useFetchMovies } from './data'
 
 const MoviesPageContainer = styled.div`
@@ -46,13 +47,7 @@ const MoviesPage: React.FC = () => {
 		setSelectedMovieId('')
 	}, [])
 
-	const [watchedList, setWatchedList] = React.useState<Watched[]>(() => {
-		const storedWatchedList = localStorage.getItem("WATCHED_MOVIES")
-		return storedWatchedList ? JSON.parse(storedWatchedList) : []
-	})
-	React.useEffect(() => {
-		localStorage.setItem("WATCHED_MOVIES", JSON.stringify(watchedList))
-	}, [watchedList])
+	const [watchedList, setWatchedList] = useLocalStorageState<Watched[]>("WATCHED_MOVIES", [])
 	const addToWatchedList = (movie: MovieDetails, userRating: number, userRatingAttempts: number) => {
 		const newWatchedMovie = mapMovieDetailsToWatched(movie, userRating, userRatingAttempts)
 		setWatchedList(list => [...list, newWatchedMovie])

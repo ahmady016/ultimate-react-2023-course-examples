@@ -1,21 +1,19 @@
 import React from 'react'
 
+import { useKeyHandler } from '../../../hooks/useKeyHandler'
+
 type SearchProps = {
 	query: string
 	setQuery: React.Dispatch<React.SetStateAction<string>>
 }
 const Search: React.FC<SearchProps> = ({ query, setQuery }) => {
 	const searchInputRef = React.useRef<HTMLInputElement>(null)
-	React.useEffect(() => {
-		function keyHandler(e: KeyboardEvent) {
-			if (document.activeElement !== searchInputRef.current && e.key === 'Enter') {
-				searchInputRef.current!.focus()
-				setQuery('')
-			}
+	useKeyHandler((e: KeyboardEvent) => {
+		if (document.activeElement !== searchInputRef.current && e.key === 'Enter') {
+			searchInputRef.current!.focus()
+			setQuery('')
 		}
-		document.addEventListener('keydown', keyHandler)
-		return () => document.addEventListener('keydown', keyHandler)
-	}, [setQuery])
+	})
 
 	return (
 		<input

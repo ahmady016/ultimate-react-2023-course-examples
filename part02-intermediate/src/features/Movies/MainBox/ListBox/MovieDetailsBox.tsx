@@ -9,6 +9,7 @@ import Alert from '../../../../components/Alert'
 import Spinner from '../../../../components/Spinner'
 import StarRatingBox from '../../../../components/StarRating/StarRatingBox'
 
+import { useKeyAction } from '../../../../hooks/useKeyAction'
 import { MovieDetails, Watched, useFetchMovieDetails } from '../../data'
 
 const MovieDetailsBoxContainer = styled.div`
@@ -113,7 +114,6 @@ const MovieDetailsBox: React.FC<MovieDetailsBoxProps> = ({
     const isWatched = watchedList.map(movie => movie.imdbID).includes(selectedMovieId)
     const watchedUserRating = watchedList.find(movie => movie.imdbID === selectedMovieId)?.userRating
 
-
     const [userRating, setUserRating] = React.useState(0)
     const userRatingAttemptsRef = React.useRef(0)
     React.useEffect(() => {
@@ -127,14 +127,7 @@ const MovieDetailsBox: React.FC<MovieDetailsBoxProps> = ({
         }
     }, [movie, userRating])
 
-    React.useEffect(() => {
-        const clearMovieSelection = (e: KeyboardEvent) => {
-            if (e.code === "Escape")
-                clearMovieId()
-        }
-        document.addEventListener("keydown", clearMovieSelection)
-        return () => { document.removeEventListener("keydown", clearMovieSelection) }
-    }, [clearMovieId])
+    useKeyAction("Escape", clearMovieId)
 
     React.useEffect(() => {
         if (movie?.title) document.title = `Movie | ${movie.title}`
