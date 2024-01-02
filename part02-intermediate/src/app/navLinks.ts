@@ -3,4 +3,5 @@ export const navLinks : Record<string, string> = {
     'star-rating': 'Star Rating',
     'currency-converter': 'Currency Converter',
     'geolocation': 'Geolocation',
+    'weather': 'Weather',
 }

@@ -6,6 +6,7 @@ import MoviesPage from '../features/Movies'
 import StarRatingPage from '../components/StarRating'
 import CurrencyConverterPage from '../features/CurrencyConverter'
 import GeolocationPage from '../features/Geolocation'
+import WeatherPage from '../features/Weather'
 
 const App: React.FC = () => (
 	<BrowserRouter>
@@ -15,6 +16,7 @@ const App: React.FC = () => (
                 <Route path="star-rating" element={<StarRatingPage />} />
                 <Route path="currency-converter" element={<CurrencyConverterPage />} />
                 <Route path="geolocation" element={<GeolocationPage />} />
+                <Route path="weather" element={<WeatherPage />} />
             </Route>
         </Routes>
     </BrowserRouter>
