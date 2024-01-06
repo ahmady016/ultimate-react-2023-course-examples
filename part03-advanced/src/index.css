@@ -5,3 +5,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+main {
+	min-height: calc(81vh - 3px);
+}
+
+/* #region scrollbar styles */
+.scroll::-webkit-scrollbar {
+	width: 4px;
+}
+.scroll:hover::-webkit-scrollbar {
+	width: 6px;
+}
+.scroll::-webkit-scrollbar-track-piece {
+	background-color: #6f91b6;
+	border-radius: 5px;
+}
+.scroll::-webkit-scrollbar-thumb {
+	background-color: #0e355c;
+	border-radius: 5px;
+}
+/* #endregion */
