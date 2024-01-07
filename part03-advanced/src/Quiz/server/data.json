@@ -1,0 +1,731 @@
+{
+  "quizzes": [
+    {
+      "id": "Jft1uV",
+      "order": 1,
+      "title": "HTML Quiz",
+      "description": "HTML is the standard markup language for Web pages and it describes the structure of a Web page"
+    },
+    {
+      "id": "ncwSAW",
+      "order": 2,
+      "title": "CSS Quiz",
+      "description": "CSS is the language we use to style an HTML document and describes how HTML elements should be displayed"
+    },
+    {
+      "id": "XaSCri",
+      "order": 3,
+      "title": "Javascript Quiz",
+      "description": "JavaScript is the programming language of the Web and it already running in your browser on your computer, on your tablet, and on your smart-phone"
+    },
+    {
+      "id": "zTF1oe",
+      "order": 4,
+      "title": "React Quiz",
+      "description": "React is a JavaScript library for building user interfaces, React apps are made out of components. A component is a piece of the UI that has its own logic and appearance."
+    }
+  ],
+  "questions": [
+    {
+      "id": "CuOSkm",
+      "order": 1,
+      "title": "What does HTML stand for?",
+      "answers": {
+        "1": "Hyper Text Markup Language",
+        "2": "Hyperlinks and Text Markup Language",
+        "3": "Home Tool Markup Language"
+      },
+      "correctAnswer": 1,
+      "points": 10,
+      "quizId": "Jft1uV"
+    },
+    {
+      "id": "FZvk4V",
+      "order": 2,
+      "title": "Who is making the Web standards?",
+      "answers": {
+        "1": "Mozilla",
+        "2": "The World Wide Web Consortium",
+        "3": "Microsoft",
+        "4": "Google"
+      },
+      "correctAnswer": 2,
+      "points": 15,
+      "quizId": "Jft1uV"
+    },
+    {
+      "id": "LAeofc",
+      "order": 3,
+      "title": "Choose the correct HTML element to define important text",
+      "answers": {
+        "1": "<important>",
+        "2": "<i>",
+        "3": "<strong>",
+        "4": "<b>"
+      },
+      "correctAnswer": 3,
+      "points": 10,
+      "quizId": "Jft1uV"
+    },
+    {
+      "id": "LAeofc",
+      "order": 4,
+      "title": "What is the correct HTML for creating a hyperlink?",
+      "answers": {
+        "1": "<a>http://www.w3schools.com</a>",
+        "2": "<a url=\"http://www.w3schools.com\">W3Schools.com</a>",
+        "3": "<a name=\"http://www.w3schools.com\">W3Schools.com</a>",
+        "4": "<a href=\"http://www.w3schools.com\">W3Schools</a>"
+      },
+      "correctAnswer": 4,
+      "points": 16,
+      "quizId": "Jft1uV"
+    },
+    {
+      "id": "TskMq6",
+      "order": 5,
+      "title": "How can you open a link in a new tab/browser window?",
+      "answers": {
+        "1": "<a href=\"url\" target=\"new\">",
+        "2": "<a href=\"url\" new>",
+        "3": "<a href=\"url\" target=\"_blank\">"
+      },
+      "correctAnswer": 3,
+      "points": 14,
+      "quizId": "Jft1uV"
+    },
+    {
+      "id": "TskMq6",
+      "order": 6,
+      "title": "How can you make a numbered list?",
+      "answers": {
+        "1": "<list>",
+        "2": "<ol>",
+        "3": "<dl>",
+        "4": "<ul>"
+      },
+      "correctAnswer": 2,
+      "points": 10,
+      "quizId": "Jft1uV"
+    },
+    {
+      "id": "Con2aB",
+      "order": 7,
+      "title": "What is the correct HTML for making a checkbox?",
+      "answers": {
+        "1": "<check>",
+        "2": "<input type=\"check\">",
+        "3": "<checkbox>",
+        "4": "<input type=\"checkbox\">"
+      },
+      "correctAnswer": 4,
+      "points": 15,
+      "quizId": "Jft1uV"
+    },
+    {
+      "id": "5XaXaP",
+      "order": 8,
+      "title": "What is the correct HTML for making a drop-down list?",
+      "answers": {
+        "1": "<select>",
+        "2": "<list>",
+        "3": "<input type=\"dropdown\">",
+        "4": "<input type=\"list\">"
+      },
+      "correctAnswer": 1,
+      "points": 20,
+      "quizId": "Jft1uV"
+    },
+    {
+      "id": "cNNEg6",
+      "order": 9,
+      "title": "Which HTML attribute specifies an alternate text for an image, if the image cannot be displayed?",
+      "answers": {
+        "1": "title",
+        "2": "desc",
+        "3": "caption",
+        "4": "alt"
+      },
+      "correctAnswer": 4,
+      "points": 15,
+      "quizId": "Jft1uV"
+    },
+    {
+      "id": "JdGoE6",
+      "order": 10,
+      "title": "In HTML, onblur and onfocus are:",
+      "answers": {
+        "1": "Event attributes",
+        "2": "HTML elements",
+        "3": "Style attributes",
+        "4": "None of the above"
+      },
+      "correctAnswer": 1,
+      "points": 20,
+      "quizId": "Jft1uV"
+    },
+
+    {
+      "id": "Kk9fw7",
+      "order": 1,
+      "title": "What does CSS stand for?",
+      "answers": {
+        "1": "Colorful Style Sheets",
+        "2": "Computer Style Sheets",
+        "3": "Creative Style Sheets",
+        "4": "Cascading Style Sheets"
+      },
+      "correctAnswer": 4,
+      "points": 10,
+      "quizId": "ncwSAW"
+    },
+    {
+      "id": "gIWROd",
+      "order": 2,
+      "title": "Which HTML tag is used to define an internal style sheet?",
+      "answers": {
+        "1": "<css>",
+        "2": "<script>",
+        "3": "<style>",
+        "4": "<link>"
+      },
+      "correctAnswer": 3,
+      "points": 15,
+      "quizId": "ncwSAW"
+    },
+    {
+      "id": "hHp67p",
+      "order": 3,
+      "title": "Which HTML attribute is used to define inline styles?",
+      "answers": {
+        "1": "<style>",
+        "2": "<class>",
+        "3": "<styles>",
+        "4": "<format>"
+      },
+      "correctAnswer": 1,
+      "points": 20,
+      "quizId": "ncwSAW"
+    },
+    {
+      "id": "AR772Q",
+      "order": 4,
+      "title": "Which property is used to change the background color?",
+      "answers": {
+        "1": "bg-color",
+        "2": "color",
+        "3": "back-color",
+        "4": "background-color"
+      },
+      "correctAnswer": 4,
+      "points": 15,
+      "quizId": "ncwSAW"
+    },
+    {
+      "id": "NZYeKI",
+      "order": 5,
+      "title": "Which CSS property is used to change the text color of an element?",
+      "answers": {
+        "1": "color",
+        "2": "text-color",
+        "3": "for-color",
+        "4": "background-color"
+      },
+      "correctAnswer": 1,
+      "points": 15,
+      "quizId": "ncwSAW"
+    },
+    {
+      "id": "XgUvWC",
+      "order": 6,
+      "title": "How do you display hyperlinks without an underline?",
+      "answers": {
+        "1": "a { underline:none; }",
+        "2": "a { text-decoration:none; }",
+        "3": "a { text-decoration:no-underline; }",
+        "4": "a { decoration:no-underline; }"
+      },
+      "correctAnswer": 2,
+      "points": 15,
+      "quizId": "ncwSAW"
+    },
+    {
+      "id": "OJADnd",
+      "order": 7,
+      "title": "How do you display hyperlinks without an underline?",
+      "answers": {
+        "1": "a { underline:none; }",
+        "2": "a { text-decoration:none; }",
+        "3": "a { text-decoration:no-underline; }",
+        "4": "a { decoration:no-underline; }"
+      },
+      "correctAnswer": 2,
+      "points": 15,
+      "quizId": "ncwSAW"
+    },
+    {
+      "id": "C0VtRD",
+      "order": 8,
+      "title": "Which property is used to change the left margin of an element?",
+      "answers": {
+        "1": "padding-left",
+        "2": "indent",
+        "3": "margin-left",
+        "4": "left"
+      },
+      "correctAnswer": 3,
+      "points": 20,
+      "quizId": "ncwSAW"
+    },
+    {
+      "id": "EUJZa6",
+      "order": 9,
+      "title": "How do you select an element with id 'demo'?",
+      "answers": {
+        "1": ".demo",
+        "2": "$demo",
+        "3": "*demo",
+        "4": "#demo"
+      },
+      "correctAnswer": 4,
+      "points": 20,
+      "quizId": "ncwSAW"
+    },
+    {
+      "id": "v5mz1K",
+      "order": 10,
+      "title": "How do you select all p elements inside a div element?",
+      "answers": {
+        "1": "div.p",
+        "2": "div p",
+        "3": "div + p",
+        "4": "div * p"
+      },
+      "correctAnswer": 2,
+      "points": 20,
+      "quizId": "ncwSAW"
+    },
+
+    {
+      "id": "nXAFYp",
+      "order": 1,
+      "title": "Inside which HTML element do we put the JavaScript?",
+      "answers": {
+        "1": "<js>",
+        "2": "<javascript>",
+        "3": "<scripting>",
+        "4": "<script>"
+      },
+      "correctAnswer": 4,
+      "points": 10,
+      "quizId": "XaSCri"
+    },
+    {
+      "id": "QyJRzl",
+      "order": 2,
+      "title": "What is the correct syntax for referring to an external script called \"main.js\"?",
+      "answers": {
+        "1": "<script src=\"main.js\">",
+        "2": "<script href=\"main.js\">",
+        "3": "<script name=\"main.js\">",
+        "4": "<script url=\"main.js\">"
+      },
+      "correctAnswer": 1,
+      "points": 20,
+      "quizId": "XaSCri"
+    },
+    {
+      "id": "KU0VLu",
+      "order": 3,
+      "title": "How do you create a function in JavaScript?",
+      "answers": {
+        "1": "function: myFunction()",
+        "2": "function myFunction()",
+        "3": "function = myFunction()",
+        "4": "function => myFunction()"
+      },
+      "correctAnswer": 2,
+      "points": 15,
+      "quizId": "XaSCri"
+    },
+    {
+      "id": "MKk80r",
+      "order": 4,
+      "title": "How to write an IF statement in JavaScript?",
+      "answers": {
+        "1": "if (i == 5)",
+        "2": "if i == 5 then",
+        "3": "if i = 5",
+        "4": "if i = 5 then"
+      },
+      "correctAnswer": 1,
+      "points": 25,
+      "quizId": "XaSCri"
+    },
+    {
+      "id": "H03PyR",
+      "order": 5,
+      "title": "How does a FOR loop start?",
+      "answers": {
+        "1": "for (i <= 5; i++)",
+        "2": "for (i = 0; i <= 5)",
+        "3": "for (i = 0; i <= 5; i++)",
+        "4": "for i = 1 to 5"
+      },
+      "correctAnswer": 3,
+      "points": 20,
+      "quizId": "XaSCri"
+    },
+    {
+      "id": "41R4RM",
+      "order": 6,
+      "title": "What is the correct way to write a JavaScript array?",
+      "answers": {
+        "1": "var colors = (1:'red', 2:'green', 3:'blue')",
+        "2": "var colors = ['red', 'green', 'blue']",
+        "3": "var colors = 'red', 'green', 'blue'",
+        "4": "var colors = ('red', 'green', 'blue')"
+      },
+      "correctAnswer": 2,
+      "points": 20,
+      "quizId": "XaSCri"
+    },
+    {
+      "id": "OygBYv",
+      "order": 7,
+      "title": "How do you find the number with the highest value of x and y?",
+      "answers": {
+        "1": "Math.max(x, y)",
+        "2": "top(x, y)",
+        "3": "ceil(x, y)",
+        "4": "Math.ceil(x, y)"
+      },
+      "correctAnswer": 1,
+      "points": 10,
+      "quizId": "XaSCri"
+    },
+    {
+      "id": "KJ4lGO",
+      "order": 8,
+      "title": "Which event occurs when the user clicks on an HTML element?",
+      "answers": {
+        "1": "onmouseclick",
+        "2": "onclick",
+        "3": "onmousedown",
+        "4": "onmouseover"
+      },
+      "correctAnswer": 2,
+      "points": 25,
+      "quizId": "XaSCri"
+    },
+    {
+      "id": "2E8M3H",
+      "order": 9,
+      "title": "The expression of calling a function or method in JavaScript is called",
+      "answers": {
+        "1": "Primary expression",
+        "2": "Functional expression",
+        "3": "Invocation expression",
+        "4": "Property Access Expression"
+      },
+      "correctAnswer": 3,
+      "points": 15,
+      "quizId": "XaSCri"
+    },
+    {
+      "id": "bNL42L",
+      "order": 10,
+      "title": "What kind of expression is \"new Point(2, 3)\"?",
+      "answers": {
+        "1": "Primary expression",
+        "2": "Invocation Expression",
+        "3": "Constructor Calling Expression",
+        "4": "Object Creation Expression"
+      },
+      "correctAnswer": 4,
+      "points": 15,
+      "quizId": "XaSCri"
+    },
+    {
+      "id": "ViVBLl",
+      "order": 11,
+      "title": "The pop() method of the array does which of the following task ?",
+      "answers": {
+        "1": "increments the total length by 1",
+        "2": "decrements the total length by 1",
+        "3": "prints the first element but no effect on the length",
+        "4": "remove and return the last element of an array"
+      },
+      "correctAnswer": 4,
+      "points": 20,
+      "quizId": "XaSCri"
+    },
+    {
+      "id": "mGHupF",
+      "order": 12,
+      "title": "What will happen if reverse() and join() methods are used simultaneously ?",
+      "answers": {
+        "1": "reverses the elements of the array",
+        "2": "reverses and concatenates the elements of the array",
+        "3": "reverses and stores in the same array",
+        "4": "none of the above"
+      },
+      "correctAnswer": 2,
+      "points": 25,
+      "quizId": "XaSCri"
+    },
+    {
+      "id": "Va5UV8",
+      "order": 13,
+      "title": "What is the purpose of a \"return\" statement in a function ?",
+      "answers": {
+        "1": "returns the value and stops executing the function",
+        "2": "returns the value and continues executing the rest of the statements, if any",
+        "3": "returns the value and stops the rest of script",
+        "4": "stops executing the function and returns the value"
+      },
+      "correctAnswer": 4,
+      "points": 20,
+      "quizId": "XaSCri"
+    },
+    {
+      "id": "NZwU1d",
+      "order": 14,
+      "title": "Multiple Declarations of variables are separated by ___ symbol",
+      "answers": {
+        "1": "colon",
+        "2": "asterisk",
+        "3": "comma",
+        "4": "semicolon"
+      },
+      "correctAnswer": 3,
+      "points": 10,
+      "quizId": "XaSCri"
+    },
+    {
+      "id": "7OO50r",
+      "order": 15,
+      "title": "The === operator ___",
+      "answers": {
+        "1": "is equal to and is of the same type)",
+        "2": "is equal to and is of the different type)",
+        "3": "is equal to",
+        "4": "none of the above"
+      },
+      "correctAnswer": 1,
+      "points": 15,
+      "quizId": "XaSCri"
+    },
+
+    {
+      "id": "oJ46Ys",
+      "order": 1,
+      "title": "Which is the most popular JavaScript framework?",
+      "answers": {
+        "1": "Angular",
+        "2": "React",
+        "3": "Svelte",
+        "4": "Vue"
+      },
+      "correctAnswer": 2,
+      "points": 10,
+      "quizId": "zTF1oe"
+    },
+    {
+      "id": "jgRtq7",
+      "order": 2,
+      "title": "Which company invented React?",
+      "answers": {
+        "1": "Google",
+        "2": "Apple",
+        "3": "Netflix",
+        "4": "Facebook"
+      },
+      "correctAnswer": 4,
+      "points": 10,
+      "quizId": "zTF1oe"
+    },
+    {
+      "id": "Hk3vIm",
+      "order": 3,
+      "title": "What's the fundamental building block of React apps?",
+      "answers": {
+        "1": "Components",
+        "2": "Blocks",
+        "3": "Elements",
+        "4": "Effects"
+      },
+      "correctAnswer": 1,
+      "points": 14,
+      "quizId": "zTF1oe"
+    },
+    {
+      "id": "b91lL0",
+      "order": 4,
+      "title": "What's the name of the syntax we use to describe the UI in React components?",
+      "answers": {
+        "1": "FBJ",
+        "2": "Babel",
+        "3": "JSX",
+        "4": "ES2015"
+      },
+      "correctAnswer": 3,
+      "points": 16,
+      "quizId": "zTF1oe"
+    },
+    {
+      "id": "6to3ss",
+      "order": 5,
+      "title": "How does data flow naturally in React apps?",
+      "answers": {
+        "1": "From parents to children",
+        "2": "From children to parents",
+        "3": "Both ways",
+        "4": "The developers decides"
+      },
+      "correctAnswer": 1,
+      "points": 10,
+      "quizId": "zTF1oe"
+    },
+    {
+      "id": "bQzgCb",
+      "order": 6,
+      "title": "How to pass data into a child component?",
+      "answers": {
+        "1": "State",
+        "2": "Props",
+        "3": "PropTypes",
+        "4": "Parameters"
+      },
+      "correctAnswer": 2,
+      "points": 15,
+      "quizId": "zTF1oe"
+    },
+    {
+      "id": "3mBzVV",
+      "order": 7,
+      "title": "When to use derived state?",
+      "answers": {
+        "1": "Whenever the state should not trigger a re-render",
+        "2": "Whenever the state can be synchronized with an effect",
+        "3": "Whenever the state should be accessible to all components",
+        "4": "Whenever the state can be computed from another state variable"
+      },
+      "correctAnswer": 4,
+      "points": 30,
+      "quizId": "zTF1oe"
+    },
+    {
+      "id": "bteUnD",
+      "order": 8,
+      "title": "What triggers a UI re-render in React?",
+      "answers": {
+        "1": "Running an effect",
+        "2": "Passing props",
+        "3": "Updating state",
+        "4": "Adding event listeners to DOM elements"
+      },
+      "correctAnswer": 3,
+      "points": 20,
+      "quizId": "zTF1oe"
+    },
+    {
+      "id": "Qf28zu",
+      "order": 9,
+      "title": "When do we directly \"touch\" the DOM in React?",
+      "answers": {
+        "1": "When we need to listen to an event",
+        "2": "When we need to change the UI",
+        "3": "When we need to add styles",
+        "4": "Almost never"
+      },
+      "correctAnswer": 4,
+      "points": 20,
+      "quizId": "zTF1oe"
+    },
+    {
+      "id": "tBJpvi",
+      "order": 10,
+      "title": "In what situation do we use a callback to update state?",
+      "answers": {
+        "1": "When updating the state will be slow",
+        "2": "When the updated state is very data-intensive",
+        "3": "When the state update should happen faster",
+        "4": "When the new state depends on the previous state"
+      },
+      "correctAnswer": 4,
+      "points": 30,
+      "quizId": "zTF1oe"
+    },
+    {
+      "id": "qnssIx",
+      "order": 11,
+      "title": "If we pass a function to useState, when will that function be called?",
+      "answers": {
+        "1": "On each re-render",
+        "2": "Each time we update the state",
+        "3": "Only on the initial render",
+        "4": "The first time we update the state"
+      },
+      "correctAnswer": 3,
+      "points": 25,
+      "quizId": "zTF1oe"
+    },
+    {
+      "id": "aaRH8n",
+      "order": 12,
+      "title": "Which hook to use for an API request on the component's initial render?",
+      "answers": {
+        "1": "useState",
+        "2": "useEffect",
+        "3": "useRef",
+        "4": "useReducer"
+      },
+      "correctAnswer": 2,
+      "points": 15,
+      "quizId": "zTF1oe"
+    },
+    {
+      "id": "uaKWyh",
+      "order": 13,
+      "title": "Which variables should go into the useEffect dependency array?",
+      "answers": {
+        "1": "Usually none",
+        "2": "All our state variables",
+        "3": "All state and props referenced in the effect",
+        "4": "All variables needed for clean up"
+      },
+      "correctAnswer": 3,
+      "points": 30,
+      "quizId": "zTF1oe"
+    },
+    {
+      "id": "LtTSzq",
+      "order": 14,
+      "title": "An effect will always run on the initial render.",
+      "answers": {
+        "1": "True",
+        "2": "It depends on the dependency array",
+        "3": "False",
+        "4": "In depends on the code in the effect"
+      },
+      "correctAnswer": 1,
+      "points": 30,
+      "quizId": "zTF1oe"
+    },
+    {
+      "id": "OSapi0",
+      "order": 15,
+      "title": "When will an effect run if it doesn't have a dependency array?",
+      "answers": {
+        "1": "Only when the component mounts",
+        "2": "Only when the component unmounts",
+        "3": "The first time the component re-renders",
+        "4": "Each time the component is re-rendered"
+      },
+      "correctAnswer": 4,
+      "points": 20,
+      "quizId": "zTF1oe"
+    }
+  ]
+}
