@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useQuizContext } from '../QuizContext'
 
 type QuizProgressContainerProps = {
 	$score: number
@@ -37,35 +38,34 @@ const QuizProgressContainer = styled.header<QuizProgressContainerProps>`
 				: 'var(--color-semi-dark)'};
 	}
 `
-type QuizProgressProps = {
-	questionsCount: number
-	currentQuestionOrder: number
-	score: number
-	totalPoints: number
-	hasAnswer: boolean
-}
-const QuizProgress: React.FC<QuizProgressProps> = ({
-	questionsCount,
-	currentQuestionOrder,
-	score,
-	totalPoints,
-	hasAnswer,
-}) => {
+const QuizProgress: React.FC = () => {
+	const {
+		totalQuizPoints,
+		totalQuizQuestions,
+		currentQuestionOrder,
+		currentQuestionHasAnswer,
+		score,
+	} = useQuizContext()
+
 	return (
 		<QuizProgressContainer
 			$score={score}
-			$totalPoints={totalPoints}
-			$hasAnswer={hasAnswer}
+			$totalPoints={totalQuizPoints}
+			$hasAnswer={currentQuestionHasAnswer}
 		>
 			<progress
-				max={questionsCount}
-				value={hasAnswer ? currentQuestionOrder : currentQuestionOrder - 1}
+				max={totalQuizQuestions}
+				value={
+					currentQuestionHasAnswer
+						? currentQuestionOrder
+						: currentQuestionOrder - 1
+				}
 			/>
 			<p>
-				Question <strong>{currentQuestionOrder}</strong>/{questionsCount}
+				Question <strong>{currentQuestionOrder}</strong>/{totalQuizQuestions}
 			</p>
 			<p>
-				Score <strong>{score}</strong>/{totalPoints}
+				Score <strong>{score}</strong>/{totalQuizPoints}
 			</p>
 		</QuizProgressContainer>
 	)

@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { secondsToTimeFormat } from '../state'
+import { useQuizContext } from '../QuizContext'
+import { QuizActionTypes, secondsToTimeFormat } from '../state'
 
 const QuizTimerContainer = styled.div`
     padding: 0.25rem 1rem;
@@ -11,15 +12,12 @@ const QuizTimerContainer = styled.div`
     color: var(--color-darkest);
     font-size: 1.25rem;
 `
-type QuizTimerProps = {
-	seconds: number
-	dispatch: React.Dispatch<unknown>
-}
-const QuizTimer: React.FC<QuizTimerProps> = ({ seconds, dispatch }) => {
-	const timer = secondsToTimeFormat(seconds)
+const QuizTimer: React.FC = () => {
+	const { secondsRemaining, dispatch } = useQuizContext()
+	const timer = secondsToTimeFormat(secondsRemaining)
 	React.useEffect(
 		function () {
-			const id = setInterval(() => dispatch({ type: 'tick' }), 1000)
+			const id = setInterval(() => dispatch({ type: QuizActionTypes.TICK }), 1000)
 			return () => clearInterval(id)
 		},
 		[dispatch]

@@ -2,6 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import { GrPrevious, GrNext } from 'react-icons/gr'
 
+import { QuizActionTypes } from '../state'
+import { useQuizContext } from '../QuizContext'
+
 const QuizNavButtonsContainer = styled.nav`
     button.nav-button {
         margin: 0 0.5rem;
@@ -14,23 +17,20 @@ const QuizNavButtonsContainer = styled.nav`
         }
     }
 `
-type QuizNavButtonsProps = {
-	currentQuestionOrder: number
-	totalQuestions: number
-	dispatch: React.Dispatch<unknown>
-}
-const QuizNavButtons: React.FC<QuizNavButtonsProps> = ({ currentQuestionOrder, totalQuestions, dispatch }) => {
+const QuizNavButtons: React.FC = () => {
+    const { currentQuestionOrder, totalQuizQuestions, dispatch } = useQuizContext()
+
     const goNext = React.useCallback(() => {
-        dispatch({ type: 'nextQuestion' })
+        dispatch({ type: QuizActionTypes.NEXT_QUESTION })
     }, [dispatch])
     const goPrev = React.useCallback(() => {
-        dispatch({ type: 'prevQuestion' })
+        dispatch({ type: QuizActionTypes.PREV_QUESTION })
     }, [dispatch])
     const finalizeQuiz = React.useCallback(() => {
-        dispatch({ type: 'quizFinished' })
+        dispatch({ type: QuizActionTypes.QUIZ_FINISHED })
     }, [dispatch])
 
-    if(currentQuestionOrder === totalQuestions)
+    if(currentQuestionOrder === totalQuizQuestions)
         return (
             <QuizNavButtonsContainer>
                 <button
@@ -57,7 +57,7 @@ const QuizNavButtons: React.FC<QuizNavButtonsProps> = ({ currentQuestionOrder, t
                 className="nav-button"
                 title='Next Question'
 				onClick={goNext}
-				disabled={currentQuestionOrder === totalQuestions}
+				disabled={currentQuestionOrder === totalQuizQuestions}
 			>
 				<GrNext />
 			</button>

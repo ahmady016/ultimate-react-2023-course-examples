@@ -1,25 +1,25 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import { QuizActionTypes } from '../state'
+import { useQuizContext } from '../QuizContext'
+
 const QuizStartScreenContainer = styled.div`
     width: 60%;
     display: flex;
     flex-direction: column;
     align-items: center;
 `
-type QuizStartScreen = {
-    title: string
-	questionsCount: number
-	dispatch: React.Dispatch<unknown>
-}
-const QuizStartScreen: React.FC<QuizStartScreen> = ({ title, questionsCount, dispatch, }) => {
+const QuizStartScreen: React.FC = () => {
+	const { quiz, totalQuizQuestions, dispatch } = useQuizContext()
 	const startQuiz = React.useCallback(() => {
-		dispatch({ type: 'quizStarted' })
+		dispatch({ type: QuizActionTypes.QUIZ_STARTED })
 	}, [dispatch])
+
 	return (
 		<QuizStartScreenContainer>
-			<h3>Welcome to The {title}!</h3>
-			<h4>{questionsCount} questions</h4>
+			<h3>Welcome to The {quiz?.title}!</h3>
+			<h4>{totalQuizQuestions} questions</h4>
 			<button onClick={startQuiz}>Let's start</button>
 		</QuizStartScreenContainer>
 	)

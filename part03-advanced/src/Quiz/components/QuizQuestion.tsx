@@ -2,7 +2,8 @@ import React from 'react'
 import classNames from 'classnames'
 import styled from 'styled-components'
 
-import { Question } from '../state'
+import { QuizActionTypes } from '../state'
+import { useQuizContext } from '../QuizContext'
 
 const QuizQuestionContainer = styled.div`
 	width: 100%;
@@ -34,25 +35,22 @@ const QuizQuestionContainer = styled.div`
 		}
 	}
 `
-type QuizQuestionProps = {
-	question: Question
-	answer: number
-	dispatch: React.Dispatch<unknown>
-}
-const QuizQuestion: React.FC<QuizQuestionProps> = ({ question, answer, dispatch }) => {
-	const { title, answers, correctAnswer } = question
-	const hasAnswer = answer > 0
+const QuizQuestion: React.FC = () => {
+	const { currentQuizQuestion, currentQuestionAnswer, dispatch } = useQuizContext()
+
+	const { title, answers, correctAnswer } = currentQuizQuestion!
+	const hasAnswer = currentQuestionAnswer > 0
 	const getButtonClasses = (currentOption: number) => {
 		return hasAnswer
 			? classNames({
-				answered: currentOption === answer,
+				answered: currentOption === currentQuestionAnswer,
 				correct: currentOption === correctAnswer,
 				wrong: currentOption !== correctAnswer,
 			})
 			: classNames({})
 	}
 	const setAnswer = React.useCallback((currentOption: number) => () => {
-		dispatch({ type: 'answerReceived', payload: currentOption })
+		dispatch({ type: QuizActionTypes.ANSWER_RECEIVED, payload: currentOption })
 	}, [dispatch])
 
 	return (

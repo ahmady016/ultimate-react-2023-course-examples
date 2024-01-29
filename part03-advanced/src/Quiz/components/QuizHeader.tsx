@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import { useQuizContext } from '../QuizContext'
+
 const QuizHeaderContainer = styled.div`
 	width: 60%;
 	margin: 1rem 0;
@@ -12,15 +14,12 @@ const QuizHeaderContainer = styled.div`
 		margin-bottom: 0.75rem;
 	}
 `
-type QuizHeaderProps = {
-	title: string
-	description: string
-}
-const QuizHeader: React.FC<QuizHeaderProps> = ({ title, description }) => {
+const QuizHeader: React.FC = () => {
+	const { quiz } = useQuizContext()
 	return (
 		<QuizHeaderContainer>
-			<h3>{title}</h3>
-			<h4>{description}</h4>
+			<h3>{quiz?.title}</h3>
+			<h4>{quiz?.description}</h4>
 		</QuizHeaderContainer>
 	)
 }

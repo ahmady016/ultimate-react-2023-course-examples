@@ -3,6 +3,9 @@ import styled from 'styled-components'
 import { MdEmojiEvents, MdEmojiObjects } from 'react-icons/md'
 import { BsEmojiNeutralFill, BsFillEmojiGrimaceFill, BsFillEmojiTearFill } from 'react-icons/bs'
 
+import { QuizActionTypes } from '../state'
+import { useQuizContext } from '../QuizContext'
+
 const QuizFinishScreenContainer = styled.div`
 	width: 60%;
 	margin: 1rem 0 2rem;
@@ -33,19 +36,9 @@ const QuizFinishScreenContainer = styled.div`
 		font-size: 1.25rem;
 	}
 `
-type QuizFinishScreenProps = {
-	totalPoints: number
-	score: number
-	highScore: number
-	dispatch: React.Dispatch<unknown>
-}
-const QuizFinishScreen: React.FC<QuizFinishScreenProps> = ({
-	totalPoints,
-	score,
-	highScore,
-	dispatch,
-}) => {
-	const percentage = (score / totalPoints) * 100
+const QuizFinishScreen: React.FC = () => {
+	const { dispatch, score, totalQuizPoints, highScore } = useQuizContext()
+	const percentage = (score / totalQuizPoints) * 100
 	let icon
 	if (percentage === 100) icon = <MdEmojiEvents />
 	if (percentage >= 80 && percentage < 100) icon = <MdEmojiObjects />
@@ -53,13 +46,13 @@ const QuizFinishScreen: React.FC<QuizFinishScreenProps> = ({
 	if (percentage >= 0 && percentage < 50) icon = <BsFillEmojiGrimaceFill />
 	if (percentage === 0) icon = <BsFillEmojiTearFill />
 
-	const restartQuiz = React.useCallback(() => dispatch({ type: 'quizRestarted' }), [dispatch])
+	const restartQuiz = React.useCallback(() => dispatch({ type: QuizActionTypes.QUIZ_RESTARTED }), [dispatch])
 	return (
 		<QuizFinishScreenContainer>
 			<p>
 				<span>{icon}</span>
 				<span>
-					You scored <strong>{score}</strong> out of {totalPoints} (
+					You scored <strong>{score}</strong> out of {totalQuizPoints} (
 					{Math.ceil(percentage)}%)
 				</span>
 			</p>

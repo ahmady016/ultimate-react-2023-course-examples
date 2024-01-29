@@ -84,8 +84,53 @@ export function secondsToTimeFormat(seconds: number) {
 	return `${mins < 10 ? '0' : ''}${mins}:${sec < 10 ? '0' : ''}${sec}`
 }
 
-export const SECONDS_PER_QUESTION = 50
-export const BASE_QUIZ_URL = 'http://localhost:5000'
+export enum QuizActionTypes {
+	QUIZZES_REQUESTED = 'quizzesRequested',
+	QUIZZES_ERROR = 'quizzesError',
+	QUIZZES_RECEIVED = 'quizzesReceived',
+	QUIZ_REQUESTED = 'quizRequested',
+	QUIZ_ERROR = 'quizError',
+	QUIZ_RECEIVED = 'quizReceived',
+	QUIZ_STARTED = 'quizStarted',
+	TICK = 'tick',
+	ANSWER_RECEIVED = 'answerReceived',
+	NEXT_QUESTION = 'nextQuestion',
+	PREV_QUESTION = 'prevQuestion',
+	QUIZ_FINISHED = 'quizFinished',
+	QUIZ_RESTARTED = 'quizRestarted',
+}
+export type QuizWithoutPayloadAction = {
+	type: QuizActionTypes.QUIZZES_REQUESTED |
+		QuizActionTypes.QUIZ_REQUESTED |
+		QuizActionTypes.QUIZ_STARTED |
+		QuizActionTypes.TICK |
+		QuizActionTypes.NEXT_QUESTION |
+		QuizActionTypes.PREV_QUESTION |
+		QuizActionTypes.QUIZ_FINISHED |
+		QuizActionTypes.QUIZ_RESTARTED
+}
+export type QuizErrorAction = {
+	type: QuizActionTypes.QUIZZES_ERROR | QuizActionTypes.QUIZ_ERROR
+	payload: string
+}
+export type QuizzesReceivedAction = {
+	type: QuizActionTypes.QUIZZES_RECEIVED
+	payload: QuizzesResponseWithoutQuestions
+}
+export type QuizReceivedAction = {
+	type: QuizActionTypes.QUIZ_RECEIVED
+	payload: QuizResponse
+}
+export type AnswerReceivedAction = {
+	type: QuizActionTypes.ANSWER_RECEIVED
+	payload: number
+}
+export type QuizAction =
+	QuizWithoutPayloadAction |
+	QuizErrorAction |
+	QuizzesReceivedAction |
+	QuizReceivedAction |
+	AnswerReceivedAction
 
 export const initialQuizState: QuizState = {
 	quizzesLoading: false,
@@ -100,60 +145,63 @@ export const initialQuizState: QuizState = {
 	highScore: 0,
 	secondsRemaining: 0,
 }
-export function quizReducer(state: QuizState, action: any): QuizState {
+
+export const SECONDS_PER_QUESTION = 50
+export const BASE_QUIZ_URL = 'http://localhost:5000'
+export function quizReducer(state: QuizState, action: QuizAction): QuizState {
 	switch (action.type) {
-		case 'quizzesRequested':
+		case QuizActionTypes.QUIZZES_REQUESTED:
 			return {
 				...state,
 				quizzesLoading: true,
 				quizzesError: '',
 				quizzes: undefined,
 			}
-		case 'quizzesError':
+		case QuizActionTypes.QUIZZES_ERROR:
 			return {
 				...state,
 				quizzesLoading: false,
 				quizzesError: action.payload,
 				quizzes: undefined,
 			}
-		case 'quizzesReceived':
+		case QuizActionTypes.QUIZZES_RECEIVED:
 			return {
 				...state,
 				quizzesLoading: false,
 				quizzesError: '',
 				quizzes: mapQuizzesResponseToQuizzes(action.payload),
 			}
-		case 'quizRequested':
+		case QuizActionTypes.QUIZ_REQUESTED:
 			return {
 				...state,
 				quizStatus: 'loading',
 			}
-		case 'quizReceived':
+		case QuizActionTypes.QUIZ_RECEIVED:
 			return {
 				...state,
 				quizStatus: 'ready',
 				quiz: mapQuizResponseToQuiz(action.payload),
 			}
-		case 'quizError':
+		case QuizActionTypes.QUIZ_ERROR:
 			return {
 				...state,
 				quizStatus: 'error',
 				quizError: action.payload,
 			}
-		case 'quizStarted':
+		case QuizActionTypes.QUIZ_STARTED:
 			return {
 				...state,
 				quizStatus: 'active',
 				currentQuestionOrder: 1,
 				secondsRemaining: getTotalQuizSeconds(state.quiz!.questions),
 			}
-		case 'tick':
+		case QuizActionTypes.TICK:
 			return {
 				...state,
 				secondsRemaining: state.secondsRemaining - 1,
 				quizStatus: state.secondsRemaining === 0 ? 'finished' : state.quizStatus,
 			}
-		case 'answerReceived':
+		case QuizActionTypes.ANSWER_RECEIVED:
 			const question = getCurrentQuestion(state.quiz!.questions, state.currentQuestionOrder)
 			return {
 				...state,
@@ -165,7 +213,7 @@ export function quizReducer(state: QuizState, action: any): QuizState {
 						? state.score + question.points
 						: state.score,
 			}
-		case 'nextQuestion':
+		case QuizActionTypes.NEXT_QUESTION:
 			const totalQuestions = getTotalQuizQuestions(state.quiz!.questions)
 			return {
 				...state,
@@ -174,27 +222,28 @@ export function quizReducer(state: QuizState, action: any): QuizState {
 						? state.currentQuestionOrder + 1
 						: totalQuestions,
 			}
-		case 'prevQuestion':
+		case QuizActionTypes.PREV_QUESTION:
 			return {
 				...state,
 				currentQuestionOrder:
 					state.currentQuestionOrder > 1 ? state.currentQuestionOrder - 1 : 1,
 			}
-		case 'quizFinished':
+		case QuizActionTypes.QUIZ_FINISHED:
 			return {
 				...state,
 				quizStatus: 'finished',
 				highScore:
 					state.score > state.highScore ? state.score : state.highScore,
 			}
-		case 'quizRestarted':
+		case QuizActionTypes.QUIZ_RESTARTED:
 			return {
 				...initialQuizState,
+				quizStatus: 'ready',
 				quizzes: state.quizzes,
 				quiz: state.quiz,
-				quizStatus: 'ready',
+				highScore: state.highScore,
 			}
 		default:
-			throw new Error('Unknown Action')
+			throw new Error('Unknown Action Type')
 	}
 }

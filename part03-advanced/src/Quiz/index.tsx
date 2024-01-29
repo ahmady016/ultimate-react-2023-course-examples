@@ -2,15 +2,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import {
-	BASE_QUIZ_URL,
-	getCurrentQuestion,
-	getTotalQuizPoints,
-	getTotalQuizQuestions,
-	initialQuizState,
-	quizReducer,
-} from './state'
-
 import QuizzesPicker from './components/QuizzesPicker'
 import QuizLoader from './components/QuizLoader'
 import QuizError from './components/QuizError'
@@ -22,6 +13,7 @@ import QuizFooter from './components/QuizFooter'
 import QuizTimer from './components/QuizTimer'
 import QuizNavButtons from './components/QuizNavButtons'
 import QuizFinishScreen from './components/QuizFinishScreen'
+import { useQuizContext } from './QuizContext'
 
 const QuizPageContainer = styled.div`
 	--color-semi-dark: #555;
@@ -84,95 +76,28 @@ const QuizPageContainer = styled.div`
     }
 `
 const QuizPage: React.FC = () => {
-	const [quizState, dispatch] = React.useReducer(quizReducer, initialQuizState)
-
-	const [selectedQuizId, setSelectedQuizId] = React.useState('')
-	const changeQuizId = React.useCallback(
-		(e: React.ChangeEvent<HTMLSelectElement>) => setSelectedQuizId(e.target.value)
-	, [])
-
-	React.useEffect(() => {
-		dispatch({ type: 'quizzesRequested' })
-		fetch(`${BASE_QUIZ_URL}/quizzes`)
-			.then((res) => res.json())
-			.then((data) => dispatch({ type: 'quizzesReceived', payload: data }) )
-			.catch((error) => dispatch({ type: 'quizError', payload: error.message }))
-	}, [])
-	React.useEffect(() => {
-		if(selectedQuizId) {
-			dispatch({ type: 'quizRequested' })
-			fetch(`${BASE_QUIZ_URL}/quizzes/${selectedQuizId}?_embed=questions`)
-				.then((res) => res.json())
-				.then((data) => dispatch({ type: 'quizReceived', payload: data }))
-				.catch((error) => dispatch({ type: 'quizError', payload: error.message }))
-		}
-	}, [selectedQuizId])
+	const { quizStatus, quizError, quiz } = useQuizContext()
 
 	return (
 		<QuizPageContainer>
-			<QuizzesPicker
-				selectedQuizId={selectedQuizId}
-				changeQuizId={changeQuizId}
-				quizState={quizState}
-			/>
-			{quizState.quizStatus === 'pending' && <p>Please Choose a Quiz from the list ...</p>}
-			{quizState.quizStatus === 'loading' && <QuizLoader />}
-			{quizState.quizStatus === 'error' && <QuizError>{quizState.quizError}</QuizError>}
-			{quizState.quizStatus === 'ready' && !quizState.quiz && <p>No Quiz Found</p>}
-			{quizState.quiz && (
-				<QuizHeader
-					title={quizState.quiz.title}
-					description={quizState.quiz.description}
-				/>
-			)}
-			{quizState.quizStatus === 'ready' && quizState.quiz && quizState.quiz.questions && (
-				<QuizStartScreen
-                    title={quizState.quiz.title}
-					questionsCount={getTotalQuizQuestions(quizState.quiz.questions)}
-					dispatch={dispatch}
-				/>
-			)}
-			{quizState.quizStatus === 'active' && quizState.quiz && quizState.quiz.questions && (
+			<QuizzesPicker />
+			{quizStatus === 'pending' && <p>Please Choose a Quiz from the list ...</p>}
+			{quizStatus === 'loading' && <QuizLoader />}
+			{quizStatus === 'error' && <QuizError>{quizError}</QuizError>}
+			{quizStatus === 'ready' && !quiz && <p>No Quiz Found</p>}
+			{quiz && <QuizHeader />}
+			{quizStatus === 'ready' && quiz && quiz.questions && <QuizStartScreen />}
+			{quizStatus === 'active' && quiz && quiz.questions && (
 				<main>
-					<QuizProgress
-						currentQuestionOrder={quizState.currentQuestionOrder}
-						questionsCount={getTotalQuizQuestions(quizState.quiz.questions)}
-						totalPoints={getTotalQuizPoints(quizState.quiz.questions)}
-						score={quizState.score}
-						hasAnswer={quizState.answers
-							? !!quizState.answers[quizState.currentQuestionOrder]
-							: false
-						}
-					/>
-					<QuizQuestion
-						question={getCurrentQuestion(quizState.quiz.questions, quizState.currentQuestionOrder)}
-						answer={quizState.answers
-							? quizState.answers[quizState.currentQuestionOrder]
-							: -1
-						}
-						dispatch={dispatch}
-					/>
+					<QuizProgress />
+					<QuizQuestion />
 					<QuizFooter>
-						<QuizTimer
-							seconds={quizState.secondsRemaining}
-							dispatch={dispatch}
-						/>
-						<QuizNavButtons
-							currentQuestionOrder={quizState.currentQuestionOrder}
-							totalQuestions={getTotalQuizQuestions(quizState.quiz.questions)}
-							dispatch={dispatch}
-						/>
+						<QuizTimer />
+						<QuizNavButtons />
 					</QuizFooter>
 				</main>
 			)}
-			{quizState.quizStatus === 'finished' && quizState.quiz && (
-				<QuizFinishScreen
-					totalPoints={getTotalQuizPoints(quizState.quiz.questions)}
-					score={quizState.score}
-					highScore={quizState.highScore}
-					dispatch={dispatch}
-				/>
-			)}
+			{quizStatus === 'finished' && quiz && <QuizFinishScreen />}
 		</QuizPageContainer>
 	)
 }
