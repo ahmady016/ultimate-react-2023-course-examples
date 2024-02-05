@@ -6,6 +6,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.dark-mode {
+	filter: invert(100%);
+	transition: all 0.7s;
+}
+
 main {
 	min-height: calc(81vh - 3px);
 }
