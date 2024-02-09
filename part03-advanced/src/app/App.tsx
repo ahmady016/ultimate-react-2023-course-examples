@@ -7,6 +7,7 @@ import AppLayout from './AppLayout'
 import QuizPage from '../Quiz'
 import BankAccountPage from '../Bank'
 import AtomicBlogPage from '../AtomicBlog'
+import WorkoutTimerPage from '../WorkoutTimer'
 
 const App: React.FC = () => (
 	<BrowserRouter>
@@ -15,6 +16,7 @@ const App: React.FC = () => (
 				<Route index element={<QuizContextProvider><QuizPage /></QuizContextProvider>} />
 				<Route path="bank" element={<BankAccountPage />} />
 				<Route path="blog" element={<AtomicBlogPage />} />
+				<Route path="workout" element={<WorkoutTimerPage />} />
 			</Route>
 		</Routes>
 	</BrowserRouter>
