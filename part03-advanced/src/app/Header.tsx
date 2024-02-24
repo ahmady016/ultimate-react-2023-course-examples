@@ -4,12 +4,11 @@ import classNames from 'classnames'
 
 import { navLinks } from './navLinks'
 
-const baseLinkClasses =
-	'block hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-300 md:dark:hover:text-blue-300'
+const baseLinkClasses = 'block hover:text-blue-300 pb-1'
 const normalLinkClasses =
-	'text-gray-900 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white'
+	'text-gray-400 hover:border hover:border-l-0 hover:border-r-0 hover:border-t-0 hover:border-b-3 hover:border-blue-300'
 const activeLinkClasses =
-	'pb-1 border border-l-0 border-r-0 border-t-0 border-b-3 border-blue-300 font-bold text-blue-300 dark:text-blue-300 dark:hover:bg-gray-700 dark:hover:text-white'
+	'border border-l-0 border-r-0 border-t-0 border-b-3 border-blue-300 font-bold text-blue-300 hover:text-gray-300'
 const Header: React.FC = () => (
 	<header>
 		<nav className="bg-white border-gray-200 dark:bg-gray-900">
