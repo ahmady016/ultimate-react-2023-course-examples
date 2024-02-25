@@ -7,6 +7,7 @@ import CreateCustomerForm from './Customers/CreateCustomerForm'
 import CustomerInfo from './Customers/CustomerInfo'
 import AccountOperations from './Accounts/AccountOperations'
 import BalanceInfo from './Accounts/BalanceInfo'
+import UpdateCustomerNameForm from './Customers/UpdateCustomerNameForm'
 
 const ReduxBankPageContainer = styled.div`
 	--color-semi-dark: #555;
@@ -80,13 +81,16 @@ const ReduxBankPageContainer = styled.div`
 `
 const ReduxBankPage: React.FC = () => {
 	const customerName = useSelector((state: any) => state.customer.fullName)
+	const [editMode, setEditMode] = React.useState(false)
+	const toggleEditMode = React.useCallback(() => setEditMode(editMode => !editMode), [])
 	return (
 		<ReduxBankPageContainer>
 			<h1>Redux Bank Page</h1>
 			{!customerName
 				?	<CreateCustomerForm />
 				: 	<>
-						<CustomerInfo />
+						<CustomerInfo toggleEditMode={toggleEditMode} />
+						{editMode && <UpdateCustomerNameForm toggleEditMode={toggleEditMode} />}
 						<AccountOperations />
 						<BalanceInfo />
 					</>
