@@ -1,10 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import { useDispatch } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { createCustomer } from './customerSlice'
 import { ReduxBankDispatch } from '../store'
+import { createCustomer } from './customerSlice'
+
+import { ReduxToolkitBankDispatch } from '../../ReduxToolkitBank/store'
+import { createCustomer as rtkCreateCustomer } from '../../ReduxToolkitBank/customerSlice'
 
 const CreateCustomerFormContainer = styled.form`
     width: 60%;
@@ -38,11 +42,18 @@ const CreateCustomerForm: React.FC = () => {
 	const [fullName, setFullName] = React.useState('')
 	const changeFullName = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => void setFullName(e.target.value), [])
 
+    const location = useLocation()
+    const isRTK = React.useMemo(() => location.pathname === '/redux-toolkit-bank', [location.pathname])
+
     const dispatch = useDispatch<ReduxBankDispatch>()
+    const rtkDispatch = useDispatch<ReduxToolkitBankDispatch>()
+
 	const handleSubmit = React.useCallback((e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (nationalId.trim() && fullName.trim()) {
-            dispatch(createCustomer({ nationalId, fullName }))
+            (isRTK)
+                ? rtkDispatch(rtkCreateCustomer({ nationalId, fullName }))
+                : dispatch(createCustomer({ nationalId, fullName }))
             setNationalId('')
             setFullName('')
         }

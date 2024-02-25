@@ -68,6 +68,7 @@ const accountReducer = (
 				balance: state.balance + action.payload.amount,
 			}
 		case AccountActionTypes.PAY_LOAN:
+			if (state.loan === 0) return state
 			return {
 				...state,
 				loan: 0,

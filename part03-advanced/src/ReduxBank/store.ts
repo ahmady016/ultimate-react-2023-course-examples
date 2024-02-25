@@ -2,12 +2,13 @@ import { legacy_createStore as createStore, combineReducers } from 'redux'
 import accountReducer, { AccountActionTypes, DepositPayload } from './Accounts/accountSlice'
 import customerReducer from './Customers/customerSlice'
 
-export const store = createStore(
+const store = createStore(
 	combineReducers({
 		account: accountReducer,
 		customer: customerReducer,
 	})
 )
+export default store
 export type ReduxBankDispatch = typeof store.dispatch
 export type ReduxBankRootState = ReturnType<typeof store.getState>
 

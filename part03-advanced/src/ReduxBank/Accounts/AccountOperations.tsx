@@ -2,10 +2,19 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { ReduxBankDispatch, ReduxBankRootState, deposit } from '../store'
 import { withdraw, requestLoan, payLoan } from './accountSlice'
+
+import { ReduxToolkitBankDispatch } from '../../ReduxToolkitBank/store'
+import {
+    deposit as rtkDeposit,
+    withdraw as rtkWithdraw,
+    requestLoan as rtkRequestLoan,
+    payLoan as rtkPayLoan
+} from '../../ReduxToolkitBank/accountSlice'
 
 import currencies from '../currencies.json'
 
@@ -36,7 +45,11 @@ const AccountOperationsContainer = styled.form`
     }
 `
 const AccountOperations: React.FC = () => {
+    const location = useLocation()
+    const isRTK = React.useMemo(() => location.pathname === '/redux-toolkit-bank', [location.pathname])
+
     const dispatch = useDispatch<ReduxBankDispatch>()
+    const rtkDispatch = useDispatch<ReduxToolkitBankDispatch>()
 
 	const [depositAmount, setDepositAmount] = React.useState(0)
 	const changeDepositAmount = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => void setDepositAmount(Number(e.target.value)), [])
@@ -44,7 +57,9 @@ const AccountOperations: React.FC = () => {
 	const changeCurrency = React.useCallback((e: React.ChangeEvent<HTMLSelectElement>) => void setCurrency(e.target.value), [])
     const handleDeposit = React.useCallback(() => {
         if(depositAmount) {
-            deposit({ amount: depositAmount, currency })
+            (isRTK)
+                ? rtkDispatch(rtkDeposit({ amount: depositAmount, currency }))
+                : deposit({ amount: depositAmount, currency })
             setDepositAmount(0)
             setCurrency('USD')
         }
@@ -54,7 +69,9 @@ const AccountOperations: React.FC = () => {
     const changeWithdrawAmount = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => void setWithdrawAmount(Number(e.target.value)), [])
     const handleWithdraw = React.useCallback(() => {
         if(withdrawAmount) {
-            dispatch(withdraw(withdrawAmount))
+            (isRTK)
+                ? rtkDispatch(rtkWithdraw(withdrawAmount))
+                : dispatch(withdraw(withdrawAmount))
             setWithdrawAmount(0)
         }
     }, [withdrawAmount])
@@ -65,14 +82,18 @@ const AccountOperations: React.FC = () => {
     const changeLoanPurpose = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => void setLoanPurpose(e.target.value), [])
     const handleRequestLoan = React.useCallback(() => {
         if(loanAmount) {
-            dispatch(requestLoan({ amount: loanAmount, purpose: loanPurpose }))
+            (isRTK)
+                ? rtkDispatch(rtkRequestLoan({ amount: loanAmount, purpose: loanPurpose }))
+                : dispatch(requestLoan({ amount: loanAmount, purpose: loanPurpose }))
             setLoanAmount(0)
             setLoanPurpose('')
         }
     }, [loanAmount, loanPurpose])
 
     const handlePayLoan = React.useCallback(() => {
-        dispatch(payLoan())
+        (isRTK)
+            ? rtkDispatch(rtkPayLoan())
+            : dispatch(payLoan())
     }, [])
 
     const { isLoading, loan: currentLoan, loanPurpose: currentLoanPurpose } = useSelector((state: ReduxBankRootState) => state.account)
