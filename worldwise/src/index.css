@@ -23,7 +23,7 @@ html {
 	box-sizing: inherit;
 }
 body {
-	font-family: 'Manrope', sans-serif;
+	font-family: 'IBM Plex Mono', sans-serif;
 	background-color: var(--color-dark--1);
 	color: var(--color-light--2);
 	font-weight: 400;
