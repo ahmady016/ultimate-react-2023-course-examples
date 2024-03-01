@@ -5,12 +5,19 @@
 
 /* #region global styles */
 :root {
+	--color-success: #28a745;
+	--color-error: #dc3545;
+	--color-info: #17a2b8;
+	--color-warning: #ffc107;
+
 	--color-brand--1: #ffb545;
 	--color-brand--2: #00c46a;
+
 	--color-dark--0: #242a2e;
 	--color-dark--1: #2d3439;
 	--color-dark--2: #42484d;
-	--color-light--1: #aaa;
+
+	--color-light--1: #aaaaaa;
 	--color-light--2: #ececec;
 	--color-light--3: #d6dee0;
 }

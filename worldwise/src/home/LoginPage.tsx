@@ -5,15 +5,14 @@ import styled from 'styled-components'
 
 const LoginPageContainer = styled.div`
 	width: 100%;
-	min-height: calc(100vh - 4.25rem);
+	min-height: calc(100vh - 9rem);
 	background-color: var(--color-dark--1);
 	display: flex;
-	flex-direction: column;
-	align-items: center;
 	justify-content: center;
+	align-items: center;
 	gap: 2rem;
 	form {
-		width: 40%;
+		width: 35%;
 		margin: auto;
 		background-color: var(--color-dark--2);
 		border-radius: 10px;
