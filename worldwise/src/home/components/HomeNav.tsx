@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
-import AppLogo from '../components/AppLogo'
+import AppLogo from '../../components/AppLogo'
 
 const HomeNavContainer = styled.nav`
 	padding: 0.75rem 1.75rem;

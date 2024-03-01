@@ -1,16 +1,16 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 
-import HomeLayout from './home/HomeLayout'
-import HomePage from './home/HomePage'
-import ProductPage from './home/ProductPage'
-import LoginPage from './home/LoginPage'
-import PricingPage from './home/PricingPage'
+import HomeLayout from './home/components/HomeLayout'
+import HomePage from './home/components/HomePage'
+import ProductPage from './home/components/ProductPage'
+import LoginPage from './home/components/LoginPage'
+import PricingPage from './home/components/PricingPage'
 
-import AppLayout from './app/AppLayout'
-import Cities from './app/Cities'
-import CityDetails from './app/CityDetails'
-import Countries from './app/Countries'
-import AddCityForm from './app/AddCityForm'
+import AppLayout from './app/components/AppLayout'
+import Cities from './app/components/Cities'
+import CityDetails from './app/components/CityDetails'
+import Countries from './app/components/Countries'
+import AddCityForm from './app/components/AddCityForm'
 
 import NotFoundPage from './NotFoundPage'
 

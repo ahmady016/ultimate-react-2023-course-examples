@@ -2,7 +2,7 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import styled from 'styled-components'
 
-import AppLogo from '../components/AppLogo'
+import AppLogo from '../../components/AppLogo'
 import AppNav from './AppNav'
 import AppFooter from './AppFooter'
 
