@@ -1,12 +1,16 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 
+import HomeNav from './HomeNav'
+
 const HomeLayout: React.FC = () => {
 	return (
-		<div>
-			<h1>HomeLayout</h1>
-			<Outlet />
-		</div>
+		<>
+			<HomeNav />
+			<main>
+				<Outlet />
+			</main>
+		</>
 	)
 }
 

@@ -8,7 +8,7 @@ import PricingPage from './home/PricingPage'
 
 import AppLayout from './app/AppLayout'
 import Cities from './app/Cities'
-import City from './app/City'
+import CityDetails from './app/CityDetails'
 import Countries from './app/Countries'
 import AddCityForm from './app/AddCityForm'
 
@@ -28,7 +28,7 @@ const App: React.FC = () => {
 				<Route path="app" element={<AppLayout />}>
 					<Route index element={<Navigate replace to="cities" />} />
 					<Route path="cities" element={<Cities />} />
-					<Route path="cities/:id" element={<City />} />
+					<Route path="cities/:id" element={<CityDetails />} />
 					<Route path="countries" element={<Countries />} />
 					<Route path="add-city" element={<AddCityForm />} />
 				</Route>
