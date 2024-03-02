@@ -61,7 +61,9 @@ const CityItem: React.FC<City> = ({ id, cityName, countryCode, date, position })
 	const { city, deleteCity } = useCities()
 	const handleDeleteCity = React.useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault()
-		deleteCity(id)
+		if(window.confirm('Are you sure you want to delete this city?')) {
+			deleteCity(id)
+		}
 	}, [deleteCity, id])
 
 	return (

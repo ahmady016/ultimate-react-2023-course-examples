@@ -8,8 +8,14 @@ const MessageContainer = styled.p`
 	width: 80%;
 	margin: 1rem auto;
 	text-align: center;
-	font-size: 1.25rem;
+	font-size: 1rem;
 	font-weight: 600;
+    svg {
+        position: relative;
+        top: 0.25rem;
+        margin-right: 0.75rem;
+        font-size: 1.25rem;
+    }
     &.success {
         color: var(--color-success);
     }

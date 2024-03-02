@@ -3,13 +3,13 @@ import styled from 'styled-components'
 
 const StyledButton = styled.button`
 	cursor: pointer;
-	padding: 0.75rem 1rem;
+	padding: 0.5rem 1rem;
 	border: none;
-	border-radius: 5px;
+	border-radius: 8px;
 	color: inherit;
 	text-transform: uppercase;
 	font-family: inherit;
-	font-size: 1.25rem;
+	font-size: 1rem;
 	&.primary {
 		font-weight: 700;
 		background-color: var(--color-brand--2);
@@ -19,6 +19,15 @@ const StyledButton = styled.button`
 		font-weight: 600;
 		background: none;
 		border: 1px solid #333;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 0.5rem;
+		&:hover {
+			font-weight: 700;
+			background-color: var(--color-brand--2);
+			color: var(--color-dark--1);
+		}
 	}
 	&.position {
 		z-index: 1000;
