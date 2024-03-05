@@ -11,9 +11,9 @@ import Message from '../../components/Message'
 import BackButton from '../../components/BackButton'
 
 const CityDetailsContainer = styled.div`
-	width: 100%;
+	width: 95%;
 	max-height: 90%;
-	padding: 1rem 2rem;
+	padding: 2rem;
 	border-radius: 10px;
 	background-color: var(--color-dark--2);
 	overflow: auto;
@@ -56,7 +56,7 @@ const CityDetailsContainer = styled.div`
 const CityDetails: React.FC = () => {
 	const { id } = useParams()
 	const { fetchCity, isLoading, error, city } = useCities()
-	React.useEffect(() => { if (id) fetchCity(+id) }, [id])
+	React.useEffect(() => { if (id) fetchCity(id) }, [id])
 
 	if (isLoading) return <Spinner />
 
@@ -96,7 +96,7 @@ const CityDetails: React.FC = () => {
 				</a>
 			</div>
 			<div>
-				<BackButton />
+				<BackButton to="/app/cities" />
 			</div>
 		</CityDetailsContainer>
 	)

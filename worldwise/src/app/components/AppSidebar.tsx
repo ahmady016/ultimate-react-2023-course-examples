@@ -7,9 +7,9 @@ import AppNav from './AppNav'
 import AppFooter from './AppFooter'
 
 const AppSidebarContainer = styled.div`
+	flex-basis: 35%;
 	height: calc(100vh - 3rem);
 	background-color: var(--color-dark--1);
-	flex-basis: 35%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;

@@ -10,7 +10,7 @@ import Spinner from '../../components/Spinner'
 import Message from '../../components/Message'
 
 const CityItemContainer = styled.li`
-	padding: 0 0.25rem;
+	padding-right: 0.75rem;
 	a, a:link, a:visited {
 		cursor: pointer;
 		text-decoration: none;

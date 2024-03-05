@@ -9,7 +9,7 @@ export type GeoPosition = {
 	lng: number
 }
 export type City = {
-	id: number
+	id: string
 	cityName: string
 	countryName: string
 	countryCode: string
@@ -17,7 +17,36 @@ export type City = {
 	notes: string
 	position: GeoPosition
 }
-
+export type GeoInfo = {
+	name: string
+	description: string
+	order: number
+	wikidataId?: string
+	geonameId?: number
+}
+export const EMPTY_CITY: City = {
+	id: '',
+	cityName: '',
+	countryName: '',
+	countryCode: '',
+	date: new Date().toISOString(),
+	notes: '',
+	position: {
+		lat: 0,
+		lng: 0
+	}
+}
+export function getGeonameId(geoName: string, geoInfo: GeoInfo[]) {
+	const geonameIds = geoInfo.reduce((acc, info) => {
+		if(info.geonameId) acc[info.name] = info.geonameId
+		return acc
+	}, {} as Record<string, number>)
+	return (
+		geonameIds[geoName] ||
+		Object.values(geonameIds).pop() ||
+		Date.now()
+	).toString()
+}
 export function countryCodeToFlagComponent(countryCode: string) {
 	return Flags[countryCode.toUpperCase() as keyof typeof Flags]
 }

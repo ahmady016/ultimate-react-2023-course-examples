@@ -41,6 +41,7 @@ const CountriesContainer = styled.ul`
 	list-style: none;
 	overflow-y: auto;
 	overflow-x: hidden;
+	padding-right: 0.75rem;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	align-content: start;

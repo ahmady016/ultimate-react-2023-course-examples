@@ -33,7 +33,7 @@ type CitiesCityCreatedAction = {
 }
 type CitiesCityDeletedAction = {
 	type: CitiesActionTypes.CITIES_CITY_DELETED
-	payload: number
+	payload: string
 }
 type CitiesAction =
 	| CitiesLoadingAction
@@ -50,12 +50,11 @@ type CitiesContextState = {
 	city: City | undefined
 }
 const initialState: CitiesContextState = {
-	isLoading: true,
+	isLoading: false,
 	error: '',
 	cities: [],
 	city: undefined,
 }
-
 export function citiesReducer(state: CitiesContextState, action: CitiesAction) {
 	switch (action.type) {
 		case CitiesActionTypes.CITIES_LOADING:
@@ -71,12 +70,14 @@ export function citiesReducer(state: CitiesContextState, action: CitiesAction) {
 				...state,
 				cities: [...state.cities, action.payload],
 				city: action.payload,
+				isLoading: false,
 			}
 		case CitiesActionTypes.CITIES_CITY_DELETED:
 			return {
 				...state,
 				cities: state.cities.filter((city) => city.id !== action.payload),
 				city: undefined,
+				isLoading: false,
 			}
 		default:
 			throw new Error('Unknown Action Type')
@@ -85,9 +86,9 @@ export function citiesReducer(state: CitiesContextState, action: CitiesAction) {
 
 type CitiesContextValue = CitiesContextState & {
 	fetchCities: () => Promise<void>
-	fetchCity: (cityId: number) => Promise<void>
+	fetchCity: (cityId: string) => Promise<void>
 	createCity: (newCity: Omit<City, 'id'>) => Promise<void>
-	deleteCity: (cityId: number) => Promise<void>
+	deleteCity: (cityId: string) => Promise<void>
 }
 const CitiesContextInitialValue: CitiesContextValue = {
 	...initialState,
@@ -118,10 +119,12 @@ const CitiesProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =
 			})
 		}
 	}, [])
-	const fetchCity = React.useCallback(async (cityId: number) => {
+	const fetchCity = React.useCallback(async (cityId: string) => {
 		try {
 			dispatch({ type: CitiesActionTypes.CITIES_LOADING })
 			const response = await fetch(`${CITIES_URL}/${cityId}`)
+			if(!response.ok)
+				throw new Error("City doesn't exist")
 			const city = await response.json()
 			dispatch({
 				type: CitiesActionTypes.CITIES_CITY_LOADED,
@@ -136,6 +139,7 @@ const CitiesProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =
 	}, [])
 	const createCity = React.useCallback(async (newCity: Omit<City, 'id'>) => {
 		try {
+			dispatch({ type: CitiesActionTypes.CITIES_LOADING })
 			const res = await fetch(CITIES_URL, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
@@ -150,8 +154,9 @@ const CitiesProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =
 			})
 		}
 	}, [])
-	const deleteCity = React.useCallback(async (cityId: number) => {
+	const deleteCity = React.useCallback(async (cityId: string) => {
 		try {
+			dispatch({ type: CitiesActionTypes.CITIES_LOADING })
 			await fetch(`${CITIES_URL}/${cityId}`, { method: 'DELETE' })
 			dispatch({ type: CitiesActionTypes.CITIES_CITY_DELETED, payload: cityId })
 		} catch (error: unknown) {
