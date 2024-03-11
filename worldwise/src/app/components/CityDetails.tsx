@@ -11,15 +11,14 @@ import Message from '../../components/Message'
 import BackButton from '../../components/BackButton'
 
 const CityDetailsContainer = styled.div`
-	width: 95%;
-	max-height: 90%;
+	margin-bottom: 1.75rem;
 	padding: 2rem;
 	border-radius: 10px;
 	background-color: var(--color-dark--2);
 	overflow: auto;
 	display: flex;
 	flex-direction: column;
-	gap: 1.5rem;
+	gap: 1.75rem;
 	& > div {
 		display: flex;
 		flex-direction: column;

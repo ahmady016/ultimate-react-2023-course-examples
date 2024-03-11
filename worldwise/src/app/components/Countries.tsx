@@ -3,22 +3,29 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { useCities } from '../CitiesContext'
-import { Country, countriesFromCities, countryCodeToFlagComponent } from '../helpers'
+import {
+	Country,
+	countriesFromCities,
+	countryCodeToFlagComponent,
+	getFirstWords
+} from '../helpers'
 
 import Spinner from '../../components/Spinner'
 import Message from '../../components/Message'
 
 const CountryItemContainer = styled.li`
-	padding: 1rem 2rem;
+	padding: 1rem;
 	border-radius: 10px;
 	border-left: 5px solid var(--color-brand--1);
 	background-color: var(--color-dark--2);
-	font-size: 1rem;
+	text-align: center;
+	font-size: 0.8rem;
 	font-weight: 600;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 0.25rem;
+	justify-content: center;
+	gap: 0.5rem;
 	svg {
 		width: 3rem;
 		font-size: 2rem;
@@ -30,7 +37,7 @@ const CountryItem: React.FC<Country> = ({ name, code }) => {
 	return (
 		<CountryItemContainer>
 			<CountryFlag />
-			<span>{name}</span>
+			<span>{getFirstWords(name, 5)}</span>
 		</CountryItemContainer>
 	)
 }

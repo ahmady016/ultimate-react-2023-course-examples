@@ -6,9 +6,8 @@ import AppMap from './AppMap'
 import AppUser from './AppUser'
 
 const AppLayoutContainer = styled.div`
-	position: relative;
 	height: 100vh;
-	padding: 1rem;
+	position: relative;
 	overscroll-behavior-y: none;
 	display: flex;
 `

@@ -15,8 +15,8 @@ import Button from '../../components/Button'
 import BackButton from '../../components/BackButton'
 
 const AddCityFormContainer = styled.form<{ $isCreateCityLoading: boolean }>`
-	width: 90%;
-	margin-top: -4.5rem;
+	margin-top: -4rem;
+	margin-bottom: 2.25rem;
 	padding: 2rem;
 	border-radius: 10px;
 	background-color: var(--color-dark--2);

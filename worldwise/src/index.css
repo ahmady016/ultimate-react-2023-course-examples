@@ -1,7 +1,7 @@
 @import 'https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap';
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap');
-@import 'https://unpkg.com/leaflet@1.9.3/dist/leaflet.css';
+@import 'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap';
+@import 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
 
 /* #region global styles */
 :root {
@@ -37,8 +37,8 @@ body {
 	line-height: 1.5;
 }
 main {
-	width: 100vw;
-	min-height: calc(100vh - 4.25rem);
+	width: 98vw;
+	min-height: calc(100vh - 5rem);
 }
 /* #endregion */
 
@@ -84,11 +84,11 @@ input:focus {
 	width: 6px;
 }
 .scroll::-webkit-scrollbar-track-piece {
-	background-color: #6f91b6;
+	background-color: var(--color-light--3);
 	border-radius: 5px;
 }
 .scroll::-webkit-scrollbar-thumb {
-	background-color: #0e355c;
+	background-color: var(--color-dark--0);
 	border-radius: 5px;
 }
 /* #endregion */

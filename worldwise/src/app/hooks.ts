@@ -67,7 +67,7 @@ export function useFetchGeolocation() {
 	const [geoLocationError, setGeoLocationError] = React.useState('')
 	const [geoPosition, setGeoPosition] = React.useState<GeoPosition | undefined>(undefined)
 
-	const getGeoPosition = React.useCallback(() => {
+	const getCurrentLocation = React.useCallback(() => {
 		if (!navigator.geolocation)
 			return setGeoLocationError('Your browser does not support geolocation')
 
@@ -85,7 +85,7 @@ export function useFetchGeolocation() {
 	}, [])
 
 	return {
-		getGeoPosition,
+		getCurrentLocation,
 		isGeoLocationLoading,
 		geoLocationError,
 		geoPosition,

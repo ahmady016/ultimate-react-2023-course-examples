@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const HomePageContainer = styled.div`
-	height: calc(100vh - 4.25rem);
+	height: calc(100vh - 5rem);
+	width: 102%;
 	background-image: linear-gradient(
 			rgba(36, 42, 46, 0.8),
 			rgba(36, 42, 46, 0.8)

@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const AppFooterContainer = styled.footer`
-	margin-top: auto;
+	margin-bottom: 1rem;
 	p {
 		font-size: 0.9rem;
 		color: var(--color-light--1);

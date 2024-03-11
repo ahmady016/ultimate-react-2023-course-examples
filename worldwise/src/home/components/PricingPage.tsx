@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const PricingPageContainer = styled.div`
-	height: calc(100vh - 4.25rem);
+	height: 100%;
 	width: 85%;
 	margin: 0 auto;
 	background-color: var(--color-dark--1);

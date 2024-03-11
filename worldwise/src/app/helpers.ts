@@ -1,4 +1,6 @@
 import Flags from 'country-flag-icons/react/3x2'
+import { faker } from '@faker-js/faker'
+import { LatLngExpression } from 'leaflet'
 
 export type Country = {
 	name: string
@@ -36,6 +38,27 @@ export const EMPTY_CITY: City = {
 		lng: 0
 	}
 }
+export const STARTER_GEO_POSITION: LatLngExpression = {
+	lat: 40,
+	lng: 0
+}
+export function getFakeUser() {
+	return {
+		name: faker.name.fullName(),
+		avatar: faker.image.avatar()
+	}
+}
+export function getFakePosition() {
+	return {
+		lat: faker.address.latitude(),
+		lng: faker.address.longitude()
+	}
+}
+export function getGeoPosition(lat: string | null, lng: string | null) : LatLngExpression {
+	return (lat && lng)
+		?	{ lat: Number(lat), lng: Number(lng) }
+		:	{ ...STARTER_GEO_POSITION }
+}
 export function getGeonameId(geoName: string, geoInfo: GeoInfo[]) {
 	const geonameIds = geoInfo.reduce((acc, info) => {
 		if(info.geonameId) acc[info.name] = info.geonameId
@@ -64,4 +87,7 @@ export function countriesFromCities(cities: City[]): Record<string, Country> {
 		countries[city.countryCode] = { name: city.countryName, code: city.countryCode }
 		return countries
 	}, {} as Record<string, Country>)
+}
+export function getFirstWords(input: string, n: number) {
+	return input.split(' ').slice(0, n).join(' ')
 }

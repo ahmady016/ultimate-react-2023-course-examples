@@ -71,6 +71,30 @@
         "lat": 65.6709,
         "lng": 50.5947
       }
+    },
+    {
+      "id": "2648147",
+      "cityName": "London",
+      "countryName": "United Kingdom of Great Britain and Northern Ireland (the)",
+      "countryCode": "GB",
+      "date": "2024-03-11T05:46:32.797Z",
+      "notes": "The best city in the UK",
+      "position": {
+        "lat": 51.4003509909573,
+        "lng": -0.08076253456115846
+      }
+    },
+    {
+      "id": "6255148",
+      "cityName": "Rome",
+      "countryName": "Italy",
+      "countryCode": "IT",
+      "date": "2024-03-11T05:47:46.130Z",
+      "notes": "The perfect city in Italy",
+      "position": {
+        "lat": 41.69945010175105,
+        "lng": 12.615898357507616
+      }
     }
   ]
 }
