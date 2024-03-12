@@ -1,7 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
+import { useNavigate } from 'react-router'
 import styled from 'styled-components'
 
-import { getFakeUser } from '../helpers'
+import { useFakeAuth } from '../../components/FakeAuthContext'
 
 const AppUserContainer = styled.div`
 	position: absolute;
@@ -36,12 +38,20 @@ const AppUserContainer = styled.div`
 	}
 `
 const AppUser: React.FC = () => {
-	const user = getFakeUser()
+	const navigate = useNavigate()
+	const { user, logout } = useFakeAuth()
+	const handleLogout = React.useCallback(() => {
+		logout()
+		navigate('/')
+	}, [])
+
+	if (!user)
+		return null
 	return (
 		<AppUserContainer>
 			<img src={user.avatar} alt={user.name} />
 			<span>Welcome, {user.name}</span>
-			<button>Logout</button>
+			<button onClick={handleLogout}>Logout</button>
 		</AppUserContainer>
 	)
 }

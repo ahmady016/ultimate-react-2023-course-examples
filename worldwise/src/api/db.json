@@ -61,18 +61,6 @@
       }
     },
     {
-      "id": "6255148",
-      "cityName": "Trusovo",
-      "countryName": "Russian Federation (the)",
-      "countryCode": "RU",
-      "date": "2024-02-29T05:26:48.000Z",
-      "notes": "This is the most amazing city",
-      "position": {
-        "lat": 65.6709,
-        "lng": 50.5947
-      }
-    },
-    {
       "id": "2648147",
       "cityName": "London",
       "countryName": "United Kingdom of Great Britain and Northern Ireland (the)",
@@ -89,11 +77,11 @@
       "cityName": "Rome",
       "countryName": "Italy",
       "countryCode": "IT",
-      "date": "2024-03-11T05:47:46.130Z",
-      "notes": "The perfect city in Italy",
+      "date": "2024-02-14T07:13:32.000Z",
+      "notes": "This is the best city in Italy",
       "position": {
-        "lat": 41.69945010175105,
-        "lng": 12.615898357507616
+        "lat": 41.63346160316553,
+        "lng": 12.53323867474582
       }
     }
   ]
