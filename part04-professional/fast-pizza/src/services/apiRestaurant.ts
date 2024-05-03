@@ -1,6 +1,13 @@
 import axios from 'axios'
-
-type Order = {
+export type Pizza = {
+  id: number
+  name: string
+  imageUrl: string
+  ingredients: string[]
+  unitPrice: number
+  soldOut: boolean
+}
+export type Order = {
   id: string
   status: string
   priority: string
@@ -10,7 +17,7 @@ const BASE_PIZZA_API_URL = 'https://react-fast-pizza-api.onrender.com/api'
 
 export async function getMenu() {
   try {
-    const res = await axios.get(`${BASE_PIZZA_API_URL}/menu`)
+    const res = await axios.get<Pizza[]>(`${BASE_PIZZA_API_URL}/menu`)
     return res.data
   } catch (error) {
     throw new Error('Failed getting menu')
