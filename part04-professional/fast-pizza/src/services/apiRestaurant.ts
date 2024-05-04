@@ -7,11 +7,22 @@ export type Pizza = {
   unitPrice: number
   soldOut: boolean
 }
+export type Cart = {
+  pizzaId: number
+  name: string
+  quantity: number
+  unitPrice: number
+  totalPrice: number
+}
 export type Order = {
   id: string
+  customer: string
   status: string
   priority: string
-  items: string[]
+  priorityPrice: number
+  orderPrice: number
+  estimatedDelivery: string
+  cart: Cart[]
 }
 const BASE_PIZZA_API_URL = 'https://react-fast-pizza-api.onrender.com/api'
 
@@ -26,7 +37,7 @@ export async function getMenu() {
 
 export async function getOrder(id: string) {
   try {
-    const res = await axios.get(`${BASE_PIZZA_API_URL}/order/${id}`)
+    const res = await axios.get<Order>(`${BASE_PIZZA_API_URL}/order/${id}`)
     return res.data
   } catch (error) {
     throw new Error(`Couldn't find order #${id}`)
