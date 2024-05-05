@@ -14,6 +14,13 @@ export type Cart = {
   unitPrice: number
   totalPrice: number
 }
+export type NewOrder = {
+  customer: string
+  phone: string
+  address: string
+  priority: boolean
+  cart: Cart[]
+}
 export type Order = {
   id: string
   customer: string
@@ -24,6 +31,33 @@ export type Order = {
   estimatedDelivery: string
   cart: Cart[]
 }
+export type CreatedOrderResponse = {
+  status: string
+  data: Order
+}
+export const initialCart: Cart[] = [
+  {
+    pizzaId: 12,
+    name: "Mediterranean",
+    quantity: 2,
+    unitPrice: 16,
+    totalPrice: 32,
+  },
+  {
+    pizzaId: 6,
+    name: "Vegetable",
+    quantity: 1,
+    unitPrice: 13,
+    totalPrice: 13,
+  },
+  {
+    pizzaId: 11,
+    name: "Spinach and Mushroom",
+    quantity: 1,
+    unitPrice: 15,
+    totalPrice: 15,
+  },
+]
 const BASE_PIZZA_API_URL = 'https://react-fast-pizza-api.onrender.com/api'
 
 export async function getMenu() {
@@ -37,17 +71,17 @@ export async function getMenu() {
 
 export async function getOrder(id: string) {
   try {
-    const res = await axios.get<Order>(`${BASE_PIZZA_API_URL}/order/${id}`)
-    return res.data
+    const { data } = await axios.get<Order>(`${BASE_PIZZA_API_URL}/order/${id}`)
+    return data
   } catch (error) {
     throw new Error(`Couldn't find order #${id}`)
   }
 }
 
-export async function createOrder(newOrder: Order) {
+export async function createOrder(newOrder: NewOrder) {
 	try {
-		const res = await axios.post(`${BASE_PIZZA_API_URL}/order`, newOrder)
-		return res.data
+		const { data } = await axios.post<CreatedOrderResponse>(`${BASE_PIZZA_API_URL}/order`, newOrder)
+		return data.data
 	} catch {
 		throw Error('Failed creating your order')
 	}

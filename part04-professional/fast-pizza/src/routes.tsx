@@ -4,10 +4,10 @@ import AppLayout from './layouts/AppLayout'
 import ErrorBox from './components/Error'
 
 import HomePage from './layouts/HomePage'
-import PizzaMenuPage, { PizzaMenuPageLoader } from './features/menu/PizzaMenuPage'
 import CartPage from './features/cart/CartPage'
+import PizzaMenuPage, { PizzaMenuPageLoader } from './features/menu/PizzaMenuPage'
 import OrderPage, { OrderPageLoader } from './features/order/OrderPage'
-import CreateOrderForm from './features/order/CreateOrderForm'
+import CreateOrderForm, { createOrderFormAction } from './features/order/CreateOrderForm'
 
 const router = createBrowserRouter([
     {
@@ -20,14 +20,14 @@ const router = createBrowserRouter([
                 element: <HomePage />
             },
             {
+                path: 'cart',
+                element: <CartPage />
+            },
+            {
                 path: 'pizza-menu',
                 element: <PizzaMenuPage />,
                 loader: PizzaMenuPageLoader,
                 errorElement: <ErrorBox />
-            },
-            {
-                path: 'cart',
-                element: <CartPage />
             },
             {
                 path: 'order/:orderId',
@@ -37,7 +37,9 @@ const router = createBrowserRouter([
             },
             {
                 path: 'order/new',
-                element: <CreateOrderForm />
+                element: <CreateOrderForm />,
+                action: createOrderFormAction,
+                errorElement: <ErrorBox />
             },
             {
                 path: '*',

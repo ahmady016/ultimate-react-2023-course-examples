@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 const LoaderDiv = styled.div`
-	--loader-color: no-repeat linear-gradient(theme(colors.stone.800) 0 0);
 	@keyframes loading {
 		20% {
 			background-position: 0% 0%, 50% 50%, 100% 50%;
