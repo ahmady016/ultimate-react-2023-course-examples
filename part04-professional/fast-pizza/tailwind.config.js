@@ -5,11 +5,19 @@ export default {
     extend: {
       fontFamily: {
         sans: [
+          'Quicksand',
+          'IBM Plex Mono',
           'Roboto',
           '"Segoe UI"',
           '"Segoe UI Emoji"',
           'sans-serif',
         ],
+      },
+      fontSize: {
+        huge: ['24rem', 1],
+      },
+      height: {
+        screen: '100dvh'
       }
     },
   },
