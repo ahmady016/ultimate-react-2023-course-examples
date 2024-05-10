@@ -13,29 +13,53 @@ const CreateOrderForm: React.FC = () => {
 	const formErrors = useActionData() as Record<string, string>
 	return (
 		<div className="my-10 px-4 text-center sm:my-16">
-			<h1 className="mb-8 text-xl font-semibold md:text-3xl">
-				The Create Order Form
-			</h1>
-			<Form method="POST">
-				<div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
-					<label className="font-semibold text-left basis-1/4">Full Name</label>
-					<input className="border border-gray-400 rounded-md basis-3/4 py-1 px-4" type="text" name="customer" required />
+			<h1 className="mb-8 text-xl font-semibold md:text-3xl">Create Order Form</h1>
+			<Form method="POST" className="w-[80%] mx-auto">
+				<div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center">
+					<label className="basis-1/4 text-left font-semibold">Full Name</label>
+					<input
+						className="basis-3/4 rounded-full border border-stone-400 px-4 py-2 text-sm transition-all duration-300 placeholder:text-stone-400 focus:border-stone-100 focus:outline-none focus:ring focus:ring-yellow-400 md:px-6 md:py-3"
+						type="text"
+						name="customer"
+						required
+					/>
 				</div>
-				<div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
-					<label className="font-semibold text-left basis-1/4">Phone number</label>
-					<input className="border border-gray-400 rounded-md basis-3/4 py-1 px-4" type="tel" name="phone" required />
+				<div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center">
+					<label className="basis-1/4 text-left font-semibold">Phone number</label>
+					<input
+						className="basis-3/4 rounded-full border border-stone-400 px-4 py-2 text-sm transition-all duration-300 placeholder:text-stone-400 focus:border-stone-100 focus:outline-none focus:ring focus:ring-yellow-400 md:px-6 md:py-3"
+						type="tel"
+						name="phone"
+						required
+					/>
 				</div>
-				{!isSubmitting && formErrors?.phone && <p className="my-2 p-2 rounded-md bg-red-200 text-red-700 text-md">Phone Error: {formErrors.phone}</p>}
-				<div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
-					<label className="font-semibold text-left basis-1/4">Address</label>
-					<input className="border border-gray-400 rounded-md basis-3/4 py-1 px-4" type="text" name="address" required />
+				{!isSubmitting && formErrors?.phone && (
+					<p className="text-sm mb-4 rounded-md bg-red-200 p-2 text-red-700">
+						{formErrors.phone}
+					</p>
+				)}
+				<div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center">
+					<label className="basis-1/4 text-left font-semibold">Address</label>
+					<input
+						className="basis-3/4 rounded-full border border-stone-400 px-4 py-2 text-sm transition-all duration-300 placeholder:text-stone-400 focus:border-stone-100 focus:outline-none focus:ring focus:ring-yellow-400 md:px-6 md:py-3"
+						type="text"
+						name="address"
+						required
+					/>
 				</div>
-				<div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
-					<input className="cursor-pointer scale-125" type="checkbox" name="priority" id="priority" />
-					<label className="cursor-pointer font-semibold" htmlFor="priority">Want to yo give your order priority ?</label>
+				<div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center">
+					<input
+						className="h-5 w-5 cursor-pointer accent-yellow-400 focus:outline-none focus:ring focus:ring-yellow-400 focus:ring-offset-2"
+						type="checkbox"
+						name="priority"
+						id="priority"
+					/>
+					<label className="cursor-pointer font-semibold" htmlFor="priority">
+						Want to yo give your order priority ?
+					</label>
 				</div>
 				<input type="hidden" name="cart" value={JSON.stringify(initialCart)} />
-				<div>
+				<div className="mt-6">
 					<Button type="submit" variant="primary" disabled={isSubmitting}>
 						{isSubmitting ? 'Submitting...' : 'Order Now'}
 					</Button>
@@ -56,9 +80,8 @@ export async function createOrderFormAction({ request }: ActionFunctionArgs) {
 
 	const errors: Record<string, string> = {}
 	if (!isValidPhone(newOrder.phone))
-		errors.phone = 'Please give us your correct phone number. We might need it to contact you.';
-	if (Object.keys(errors).length > 0)
-		return errors
+		errors.phone = 'Please give us your correct phone number. We might need it to contact you.'
+	if (Object.keys(errors).length > 0) return errors
 
 	const createdOrder = await createOrder(newOrder)
 	return redirect(`/order/${createdOrder.id}`)
