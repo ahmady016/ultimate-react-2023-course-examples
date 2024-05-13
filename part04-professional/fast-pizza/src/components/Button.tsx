@@ -19,9 +19,10 @@ const Button: React.FC<ButtonProps> = ({
 	children,
 	variant = 'primary',
 	to,
+	...props
 }) => {
 	if (to) return <Link to={to} className={variants[variant]}>{children}</Link>
-	return <button type={type} className={variants[variant]}>{children}</button>
+	return <button type={type} className={variants[variant]} {...props}>{children}</button>
 }
 
 export default Button

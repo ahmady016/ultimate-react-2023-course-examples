@@ -1,12 +1,16 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { useNavigation, useActionData, Form, redirect, ActionFunctionArgs } from 'react-router-dom'
 
+import { RootState } from '../../store'
 import { isValidPhone } from '../../services/helpers'
 import { initialCart, NewOrder, createOrder } from '../../services/apiRestaurant'
 
 import Button from '../../components/Button'
 
 const CreateOrderForm: React.FC = () => {
+	const username = useSelector((state: RootState) => state.user.name)
+
 	const navigation = useNavigation()
 	const isSubmitting = navigation.state === 'submitting'
 
@@ -21,6 +25,8 @@ const CreateOrderForm: React.FC = () => {
 						className="basis-3/4 rounded-full border border-stone-400 px-4 py-2 text-sm transition-all duration-300 placeholder:text-stone-400 focus:border-stone-100 focus:outline-none focus:ring focus:ring-yellow-400 md:px-6 md:py-3"
 						type="text"
 						name="customer"
+						placeholder="Type Your Full Name"
+						defaultValue={username}
 						required
 					/>
 				</div>
@@ -30,6 +36,7 @@ const CreateOrderForm: React.FC = () => {
 						className="basis-3/4 rounded-full border border-stone-400 px-4 py-2 text-sm transition-all duration-300 placeholder:text-stone-400 focus:border-stone-100 focus:outline-none focus:ring focus:ring-yellow-400 md:px-6 md:py-3"
 						type="tel"
 						name="phone"
+						placeholder="Type Your Phone Number"
 						required
 					/>
 				</div>
@@ -44,6 +51,7 @@ const CreateOrderForm: React.FC = () => {
 						className="basis-3/4 rounded-full border border-stone-400 px-4 py-2 text-sm transition-all duration-300 placeholder:text-stone-400 focus:border-stone-100 focus:outline-none focus:ring focus:ring-yellow-400 md:px-6 md:py-3"
 						type="text"
 						name="address"
+						placeholder="Type Your Address"
 						required
 					/>
 				</div>
