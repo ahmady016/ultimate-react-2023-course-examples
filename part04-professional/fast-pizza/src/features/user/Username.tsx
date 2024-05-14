@@ -1,8 +1,9 @@
 import { useSelector } from 'react-redux'
-import { RootState } from '../../store'
+
+import { selectUserName } from './userSlice'
 
 const Username: React.FC = () => {
-	const username = useSelector((state: RootState) => state.user.name)
+	const username = useSelector(selectUserName)
 
 	if (!username) return null
 	return <div className="hidden text-sm font-semibold md:block">{username}</div>

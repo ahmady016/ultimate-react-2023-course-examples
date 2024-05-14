@@ -4,7 +4,8 @@ import { IoCloseOutline } from 'react-icons/io5'
 import { Cart } from '../../services/apiRestaurant'
 import { formatCurrency } from '../../services/helpers'
 
-import Button from '../../components/Button'
+import RemoveCartItemButton from './RemoveCartItemButton'
+import UpdateCartItemQuantity from './UpdateCartItemQuantity'
 
 const CartItem: React.FC<Cart> = ({ pizzaId, name, quantity, unitPrice }) => {
 	return (
@@ -14,7 +15,8 @@ const CartItem: React.FC<Cart> = ({ pizzaId, name, quantity, unitPrice }) => {
 			</p>
 			<div className="flex items-center justify-between sm:gap-6">
 				<p>{formatCurrency(unitPrice)}</p>
-				<Button variant="small">DELETE</Button>
+				<UpdateCartItemQuantity pizzaId={pizzaId} quantity={quantity} />
+				<RemoveCartItemButton pizzaId={pizzaId} />
 			</div>
 		</li>
 	)

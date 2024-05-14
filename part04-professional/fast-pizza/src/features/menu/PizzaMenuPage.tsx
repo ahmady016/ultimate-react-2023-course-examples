@@ -8,7 +8,6 @@ import PizzaMenuItem from './PizzaMenuItem'
 
 const PizzaMenuPage: React.FC = () => {
 	const { data: pizzaMenuItems } = useLoaderData() as AxiosResponse
-	console.log(pizzaMenuItems)
 
 	return (
 		<div className="py-3">

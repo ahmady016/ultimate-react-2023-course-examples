@@ -27,3 +27,6 @@ export const userSlice = createSlice({
 
 export const { setUser, updateName, updateEmail } = userSlice.actions
 export default userSlice.reducer
+
+export const selectUserName = (state: User) => state.name
+export const selectUserEmail = (state: User) => state.email

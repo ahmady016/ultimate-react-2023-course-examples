@@ -1,15 +1,15 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { useNavigation, useActionData, Form, redirect, ActionFunctionArgs } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
-import { RootState } from '../../store'
+import { selectUserName } from '../user/userSlice'
 import { isValidPhone } from '../../services/helpers'
 import { initialCart, NewOrder, createOrder } from '../../services/apiRestaurant'
 
 import Button from '../../components/Button'
 
 const CreateOrderForm: React.FC = () => {
-	const username = useSelector((state: RootState) => state.user.name)
+	const username = useSelector(selectUserName)
 
 	const navigation = useNavigation()
 	const isSubmitting = navigation.state === 'submitting'

@@ -1,13 +1,13 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-import { RootState } from '../store'
+import { selectUserName } from '../features/user/userSlice'
 
 import Button from '../components/Button'
 import CreateUserForm from '../features/user/CreateUserForm'
 
 const HomePage: React.FC = () => {
-	const username = useSelector((state: RootState) => state.user.name)
+	const username = useSelector(selectUserName)
 
 	return (
 		<div className="my-10 px-4 text-center sm:my-16">

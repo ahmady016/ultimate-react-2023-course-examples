@@ -1,16 +1,29 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { BiArrowBack } from 'react-icons/bi'
 
-import { RootState } from '../../store'
-import { initialCart } from '../../services/apiRestaurant'
+import { useAppDispatch } from '../../store'
+import { selectUserName } from '../user/userSlice'
+import { clearCart, selectCartList, selectIsEmptyCart } from './cartSlice'
 
-import CartItem from './CartItem'
-import LinkButton from '../../components/LinkButton'
 import Button from '../../components/Button'
+import LinkButton from '../../components/LinkButton'
+import EmptyCart from './EmptyCart'
+import CartItem from './CartItem'
 
 const CartPage: React.FC = () => {
-	const username = useSelector((state: RootState) => state.user.name)
+	const isEmptyCart = useSelector(selectIsEmptyCart)
+	const username = useSelector(selectUserName)
+	const cart = useSelector(selectCartList)
+
+	console.log("🚀 ~ isEmptyCart:", isEmptyCart)
+	console.log("🚀 ~ cart:", cart)
+
+	const dispatch = useAppDispatch()
+	const handleClearCart = React.useCallback(() => void dispatch(clearCart()), [])
+
+	if(isEmptyCart) return <EmptyCart />
 
 	return (
 		<div className="text-center sm:my-16 lg:my-4">
@@ -20,11 +33,11 @@ const CartPage: React.FC = () => {
 			</LinkButton>
 			<h2 className="mt-6 text-xl font-semibold md:text-2xl">Your Cart {username}</h2>
 			<ul className="mt-3 divide-y divide-stone-200 border-b">
-				{initialCart.map(item => <CartItem key={item.pizzaId} {...item} /> )}
+				{cart.map(item => <CartItem key={item.pizzaId} {...item} /> )}
 			</ul>
 			<div className="mt-6 space-x-2">
 				<Button to="/order/new" variant="primary">Order Pizzas</Button>
-				<Button variant="secondary">Clear Cart</Button>
+				<Button variant="secondary" onClick={handleClearCart}>Clear Cart</Button>
 			</div>
 		</div>
 	)
