@@ -6,9 +6,10 @@ import { Pizza } from '../../services/apiRestaurant'
 import { formatCurrency } from '../../services/helpers'
 
 import { useAppDispatch } from '../../store'
-import { addToCart, selectIsItemInCart } from '../cart/cartSlice'
+import { addToCart, selectCartItemQuantity, selectIsItemInCart } from '../cart/cartSlice'
 
 import Button from '../../components/Button'
+import UpdateCartItemQuantity from '../cart/UpdateCartItemQuantity'
 import RemoveCartItemButton from '../cart/RemoveCartItemButton'
 
 const PizzaMenuItem: React.FC<Pizza> = ({ id, name, imageUrl, ingredients, unitPrice, soldOut }) => {
@@ -26,6 +27,7 @@ const PizzaMenuItem: React.FC<Pizza> = ({ id, name, imageUrl, ingredients, unitP
 	}, [id, name, unitPrice])
 
 	const isItemInCart = useSelector(selectIsItemInCart(id))
+	const quantity = useSelector(selectCartItemQuantity(id))
 
 	return (
 		<li className="flex gap-4 py-2" key={id}>
@@ -38,7 +40,12 @@ const PizzaMenuItem: React.FC<Pizza> = ({ id, name, imageUrl, ingredients, unitP
 						?	<p className="text-sm font-medium uppercase text-stone-500">SOLD OUT</p>
 						: 	<>
 								<p className="text-sm">{formatCurrency(unitPrice)}</p>
-								{isItemInCart && <RemoveCartItemButton pizzaId={id} />}
+								{isItemInCart &&
+									<div className="flex items-center gap-2 sm:gap-6">
+										<UpdateCartItemQuantity pizzaId={id} quantity={quantity} />
+										<RemoveCartItemButton pizzaId={id} />
+									</div>
+								}
 							</>
 					}
 					{!isItemInCart && !soldOut &&

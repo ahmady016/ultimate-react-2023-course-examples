@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { FaLongArrowAltRight } from 'react-icons/fa'
 
 import { formatCurrency } from '../../services/helpers'
 import { selectCartTotalPrice, selectCartTotalQuantity, selectIsEmptyCart } from './cartSlice'
@@ -18,7 +19,10 @@ const CartStatusBar: React.FC = () => {
 				<span>{totalQuantity} pizzas</span>
 				<span>{formatCurrency(totalPrice)}</span>
 			</p>
-			<Link to="/cart" className="font-semibold">Open cart &rarr;</Link>
+			<Link to="/cart" className="flex items-center gap-2 font-semibold">
+				<span>Open Cart</span>
+				<FaLongArrowAltRight />
+			</Link>
 		</div>
 	)
 }
