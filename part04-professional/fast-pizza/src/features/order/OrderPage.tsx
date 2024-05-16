@@ -40,10 +40,12 @@ const OrderPage: React.FC = () => {
 				{order.cart.map(item => <OrderItem key={item.pizzaId} {...item} />)}
 			</ul>
 			<div className="space-y-2 bg-stone-200 px-6 py-5">
-				<p className="text-sm font-medium text-stone-600">Price pizza: {formatCurrency(order.orderPrice)}</p>
+				<p className="text-sm font-medium text-stone-600">
+					Pizza Price: {formatCurrency(order.orderPrice)}
+				</p>
 				{order.priority && (
 					<p className="text-sm font-medium text-stone-600">
-						Price priority: {formatCurrency(order.priorityPrice)}
+						Priority Price: {formatCurrency(order.priorityPrice)}
 					</p>
 				)}
 				<p className="text-md font-bold text-stone-600">

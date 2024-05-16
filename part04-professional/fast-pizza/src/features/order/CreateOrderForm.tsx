@@ -2,19 +2,32 @@ import React from 'react'
 import { useNavigation, useActionData, Form, redirect, ActionFunctionArgs } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
+import store from '../../store'
 import { selectUserName } from '../user/userSlice'
-import { isValidPhone } from '../../services/helpers'
-import { initialCart, NewOrder, createOrder } from '../../services/apiRestaurant'
+import { clearCart, selectCartList, selectCartTotalPrice, selectIsEmptyCart } from '../cart/cartSlice'
 
+import { NewOrder, createOrder } from '../../services/apiRestaurant'
+import { formatCurrency, isValidPhone } from '../../services/helpers'
+
+import EmptyCart from '../cart/EmptyCart'
 import Button from '../../components/Button'
 
 const CreateOrderForm: React.FC = () => {
+	const isEmptyCart = useSelector(selectIsEmptyCart)
 	const username = useSelector(selectUserName)
+	const userCart = useSelector(selectCartList)
 
 	const navigation = useNavigation()
 	const isSubmitting = navigation.state === 'submitting'
-
 	const formErrors = useActionData() as Record<string, string>
+
+	const [withPriority, setWithPriority] = React.useState(false)
+	const changeWithPriority = React.useCallback((e: React.ChangeEvent<HTMLInputElement>) => setWithPriority(e.target.checked), [])
+	const totalCartPrice = useSelector(selectCartTotalPrice)
+	const totalPriceWithPriority = withPriority ? totalCartPrice + (totalCartPrice * 0.2) : totalCartPrice
+
+	if(isEmptyCart) return <EmptyCart />
+
 	return (
 		<div className="my-10 px-4 text-center sm:my-16">
 			<h1 className="mb-8 text-xl font-semibold md:text-3xl">Create Order Form</h1>
@@ -59,17 +72,19 @@ const CreateOrderForm: React.FC = () => {
 					<input
 						className="h-5 w-5 cursor-pointer accent-yellow-400 focus:outline-none focus:ring focus:ring-yellow-400 focus:ring-offset-2"
 						type="checkbox"
-						name="priority"
 						id="priority"
+						name="priority"
+						checked={withPriority}
+						onChange={changeWithPriority}
 					/>
 					<label className="cursor-pointer font-semibold" htmlFor="priority">
 						Want to yo give your order priority ?
 					</label>
 				</div>
-				<input type="hidden" name="cart" value={JSON.stringify(initialCart)} />
+				<input type="hidden" name="cart" value={JSON.stringify(userCart)} />
 				<div className="mt-6">
 					<Button type="submit" variant="primary" disabled={isSubmitting}>
-						{isSubmitting ? 'Submitting...' : 'Order Now'}
+						{isSubmitting ? 'Submitting...' : `Order Now For ${formatCurrency(totalPriceWithPriority)}`}
 					</Button>
 				</div>
 			</Form>
@@ -92,6 +107,7 @@ export async function createOrderFormAction({ request }: ActionFunctionArgs) {
 	if (Object.keys(errors).length > 0) return errors
 
 	const createdOrder = await createOrder(newOrder)
+	store.dispatch(clearCart())
 	return redirect(`/order/${createdOrder.id}`)
 }
 

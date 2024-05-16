@@ -10,7 +10,7 @@ const HomePage: React.FC = () => {
 	const username = useSelector(selectUserName)
 
 	return (
-		<div className="my-10 px-4 text-center sm:my-16">
+		<div className="my-5 px-4 text-center sm:my-10">
 			<h1 className="mb-8 text-xl font-semibold md:text-3xl">
 				<p className="mb-4">The Best Pizza.</p>
 				<span className="text-yellow-500">Straight out of the oven, straight to you.</span>

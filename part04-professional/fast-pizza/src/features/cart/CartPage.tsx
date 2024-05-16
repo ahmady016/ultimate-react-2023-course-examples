@@ -17,9 +17,6 @@ const CartPage: React.FC = () => {
 	const username = useSelector(selectUserName)
 	const cart = useSelector(selectCartList)
 
-	console.log("🚀 ~ isEmptyCart:", isEmptyCart)
-	console.log("🚀 ~ cart:", cart)
-
 	const dispatch = useAppDispatch()
 	const handleClearCart = React.useCallback(() => void dispatch(clearCart()), [])
 
