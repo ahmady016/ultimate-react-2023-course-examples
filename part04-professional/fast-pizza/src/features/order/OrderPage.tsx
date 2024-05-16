@@ -6,6 +6,7 @@ import { getOrder, Order, Pizza } from '../../services/apiRestaurant'
 import { calcMinutesLeft, formatCurrency, formatDate } from '../../services/helpers'
 
 import OrderItem from './OrderItem'
+import UpdateOrderPriority from './UpdateOrderPriority'
 
 const OrderPage: React.FC = () => {
 	const { data: order } = useLoaderData() as AxiosResponse<Order>
@@ -65,6 +66,7 @@ const OrderPage: React.FC = () => {
 					To pay on delivery: {formatCurrency(order.orderPrice + order.priorityPrice)}
 				</p>
 			</div>
+			{!order.priority && <UpdateOrderPriority />}
 		</div>
 	)
 }

@@ -25,7 +25,7 @@ export type Order = {
   id: string
   customer: string
   status: string
-  priority: string
+  priority: boolean
   priorityPrice: number
   orderPrice: number
   estimatedDelivery: string
@@ -91,6 +91,6 @@ export async function updateOrder(id: string, updatedValues: Partial<Order>) {
 	try {
 		await axios.patch(`${BASE_PIZZA_API_URL}/order/${id}`, updatedValues)
 	} catch (err) {
-		throw Error('Failed updating your order')
+		throw Error('Failed Updating Your Order')
 	}
 }

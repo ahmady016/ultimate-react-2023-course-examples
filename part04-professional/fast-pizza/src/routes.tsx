@@ -8,6 +8,7 @@ import CartPage from './features/cart/CartPage'
 import PizzaMenuPage, { PizzaMenuPageLoader } from './features/menu/PizzaMenuPage'
 import OrderPage, { OrderPageLoader } from './features/order/OrderPage'
 import CreateOrderForm, { createOrderFormAction } from './features/order/CreateOrderForm'
+import { updateOrderPriorityAction } from './features/order/UpdateOrderPriority'
 
 const router = createBrowserRouter([
     {
@@ -33,6 +34,7 @@ const router = createBrowserRouter([
                 path: 'order/:orderId',
                 element: <OrderPage />,
                 loader: OrderPageLoader,
+                action: updateOrderPriorityAction,
                 errorElement: <ErrorBox />
             },
             {
