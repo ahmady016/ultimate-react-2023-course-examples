@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { RootState } from '../../store'
-import { Cart, initialCart } from '../../services/apiRestaurant'
+import { Cart } from '../../services/apiRestaurant'
 
 
 export type CartState = {
 	list: Cart[]
 }
 const initialState: CartState = {
-	list: initialCart,
+	list: [],
 }
 
 export const cartSlice = createSlice({
@@ -26,14 +26,14 @@ export const cartSlice = createSlice({
 		},
 		increaseItemQuantity(state, action: PayloadAction<number>) {
 			const item = state.list.find(item => item.pizzaId === action.payload)
-			if (item) {
+			if (item && item.quantity < 100) {
 				item.quantity++
 				item.totalPrice = item.unitPrice * item.quantity
 			}
 		},
 		decreaseItemQuantity(state, action: PayloadAction<number>) {
 			const item = state.list.find(item => item.pizzaId === action.payload)
-			if (item) {
+			if (item && item.quantity > 1) {
 				item.quantity--
 				item.totalPrice = item.unitPrice * item.quantity
 			}
